@@ -6,6 +6,7 @@
 <title>Selva Agency — Criação &amp; Performance no digital</title>
 <meta name="description" content="Selva Agency: criação e performance no digital. São Paulo, desde 2014.">
 <link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
@@ -78,7 +79,7 @@ a{color:#F6F5E6}a:hover{color:#ED6E1A}
 .band canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 
 /* HERO */
-.hero{position:relative;height:calc(var(--vh) * 2.6);background:#0B0B0C}
+.hero{position:relative;height:calc(var(--vh) * 3.4);background:#0B0B0C}
 .hcv{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity 1.2s}
 .hero-top{position:absolute;top:92px;left:clamp(16px,3vw,40px);right:clamp(16px,3vw,40px);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:rgba(246,245,230,.75)}
 .hero-phase{position:absolute;right:clamp(16px,3vw,40px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;text-align:right}
@@ -314,7 +315,8 @@ a{color:#F6F5E6}a:hover{color:#ED6E1A}
       <div class="hero-phase mono" aria-hidden="true">
         <span data-a="phase" style="opacity: 1; color: #ED6E1A">[01] Marca</span>
         <span data-a="phase">[02] Universo</span>
-        <span data-a="phase">[03] Sistema</span>
+        <span data-a="phase">[03] Saturno</span>
+        <span data-a="phase">[04] Sistema</span>
       </div>
       <h1 class="hero-h xw">
         <span class="w" data-a="hw">Sua</span> <span class="w" data-a="hw">marca</span> <span class="w" data-a="hw">brilhando,</span> <span class="w" data-a="hw" style="opacity: .2">do</span> <span class="w" data-a="hw" style="opacity: .2">jeito</span> <span class="w" data-a="hw" style="opacity: .2">certo,</span> <span class="w" data-a="hw" style="opacity: .2">para</span> <span class="w" data-a="hw" style="opacity: .2">as</span> <span class="w" data-a="hw" style="opacity: .2">pessoas</span> <span class="w" data-a="hw" style="opacity: .2; color: #ED6E1A">certas.</span>
@@ -1126,12 +1128,21 @@ class Component extends DCLogic {
     const cols = Math.ceil(Math.sqrt(N * 2.1)), rows = Math.ceil(N / cols), sp = 1500 / cols, Gr = [];
     for (let i = 0; i < N; i++) { const c = i % cols, r = Math.floor(i / cols); Gr.push({ x: (c - (cols - 1) / 2) * sp, y: (r - (rows - 1) / 2) * sp }); }
     const perm = (n) => { const a = []; for (let i = 0; i < n; i++) a.push(i); for (let i = n - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); const tmp = a[i]; a[i] = a[j]; a[j] = tmp; } return a; };
-    const p1 = perm(N), p2 = perm(N), P = [];
+    const p1 = perm(N), p2 = perm(N), p3 = perm(N), P = [];
+    const NP = Math.round(N * 0.36), Sat = [];
+    for (let i = 0; i < NP; i++) { const y = 1 - (i / (NP - 1)) * 2, r = Math.sqrt(1 - y * y), th = i * 2.399963; Sat.push({ px: Math.cos(th) * r * 180, py: y * 180, pz: Math.sin(th) * r * 180, sr: 0 }); }
+    const tracks = [[262, 0], [284, 0], [318, 1], [340, 1], [362, 1], [384, 1], [406, 1], [446, 2], [468, 2], [492, 3]];
+    const circ = tracks.reduce((a, tr) => a + tr[0], 0), NR = N - NP;
+    tracks.forEach((tr, ti) => {
+      const cnt = ti === tracks.length - 1 ? NR - (Sat.length - NP) : Math.round(NR * tr[0] / circ);
+      const off = rnd() * 6.283;
+      for (let k = 0; k < cnt; k++) Sat.push({ sr: tr[0], sth: off + (k / cnt) * Math.PI * 2, sy: (rnd() - 0.5) * 3, band: tr[1] });
+    });
     for (let i = 0; i < N; i++) {
-      const a = T[i], s = Sph[p1[i]], gg = Gr[p2[i]];
+      const a = T[i], s = Sph[p1[i]], gg = Gr[p2[i]], st = Sat[p3[i]];
       const u = rnd() * 2 - 1, th = rnd() * Math.PI * 2, q = Math.sqrt(1 - u * u);
       const special = a.type !== 2 && (i % 31 === 0 ? 1 : i % 57 === 0 ? 2 : 0);
-      P.push({ tx: a.x, ty: a.y, tz: a.z, type: a.type, sx: s.x, sy: s.y, sz: s.z, gx: gg.x, gy: gg.y, d1: rnd() * 0.35, d2: rnd() * 0.35, dx: Math.cos(th) * q, dy: Math.sin(th) * q, dz: u, ph: rnd() * 6.283, sp: 0.6 + rnd() * 1.8, special, ox: 0, oy: 0, vx: 0, vy: 0, X: 0, Y: 0, Z: 0, r: 0, c: '' });
+      P.push({ tx: a.x, ty: a.y, tz: a.z, type: a.type, sx: s.x, sy: s.y, sz: s.z, gx: gg.x, gy: gg.y, st, d1: rnd() * 0.35, d2: rnd() * 0.35, d3: rnd() * 0.35, dx: Math.cos(th) * q, dy: Math.sin(th) * q, dz: u, ph: rnd() * 6.283, sp: 0.6 + rnd() * 1.8, special, ox: 0, oy: 0, vx: 0, vy: 0, X: 0, Y: 0, Z: 0, r: 0, c: '' });
     }
     this.P = P; this.gsp = sp; this.tstep = step; this.order = P.map((_, i) => i);
   }
@@ -1141,10 +1152,10 @@ class Component extends DCLogic {
     const p = this._pin(E.hero);
     const n = E.hw.length;
     for (let j = 0; j < n; j++) {
-      const thr = j < 3 ? -1 : 0.04 + ((j - 3) / Math.max(1, n - 3)) * 0.5;
+      const thr = j < 3 ? -1 : 0.03 + ((j - 3) / Math.max(1, n - 3)) * 0.4;
       this._set(E.hw[j], 'opacity', (0.2 + 0.8 * this._c((p - thr) * 8)).toFixed(2));
     }
-    const ph = p < 0.3 ? 0 : p < 0.66 ? 1 : 2;
+    const ph = p < 0.22 ? 0 : p < 0.46 ? 1 : p < 0.8 ? 2 : 3;
     E.phase.forEach((s, i) => { this._set(s, 'opacity', i === ph ? '1' : '0.3'); this._set(s, 'color', i === ph ? '#ED6E1A' : '#F6F5E6'); });
     this._dots(t, p, still);
   }
@@ -1158,7 +1169,8 @@ class Component extends DCLogic {
     const g = cv.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
     const S = Math.min(w * (w < 700 ? 0.9 : 0.74), 1180) / 1000;
     const cx = w / 2, cy = h * (w < 700 ? 0.44 : 0.47);
-    const m1g = this._c((p - 0.1) / 0.3), m2g = this._c((p - 0.52) / 0.3);
+    const m1g = this._c((p - 0.05) / 0.2), m2g = this._c((p - 0.3) / 0.2), m3g = this._c((p - 0.7) / 0.2);
+    const satRot = still ? 0 : t, cA = Math.cos(0.42), sA = Math.sin(0.42), cB = Math.cos(-0.36), sB = Math.sin(-0.36);
     const force = this.props.mouseForce == null ? 1 : +this.props.mouseForce;
     const mx = still ? 0 : this.m.snx * force, my = still ? 0 : this.m.sny * force;
     const rotY = mx * 0.55, rotX = -my * 0.35;
@@ -1175,14 +1187,22 @@ class Component extends DCLogic {
       const q = P[i];
       const e1 = this._ease(this._c((m1g - q.d1) / 0.65));
       const e2 = this._ease(this._c((m2g - q.d2) / 0.65));
+      const e3 = this._ease(this._c((m3g - q.d3) / 0.65));
+      const st = q.st;
+      let sxp, syp, szp;
+      if (st.sr) { const th = st.sth + satRot * 0.16 * Math.pow(400 / st.sr, 1.5); sxp = st.sr * Math.cos(th); syp = st.sy; szp = st.sr * Math.sin(th); }
+      else { sxp = st.px * cS + st.pz * sS; syp = st.py; szp = -st.px * sS + st.pz * cS; }
+      const sy1 = syp * cA - szp * sA, sz1 = syp * sA + szp * cA;
+      const cxs = (sxp * cB - sy1 * sB) * 0.86, cys = (sxp * sB + sy1 * cB) * 0.86 - 40, czs = sz1 * 0.86;
       let ax = q.tx, ay = q.ty, az = q.tz + (still ? 0 : Math.sin(t * 1.2 + q.tx * 0.012) * 10);
       if (q.type === 2) { ax += Math.sin(t * 0.2 + q.ph) * 20; ay += Math.cos(t * 0.25 + q.ph) * 14; }
       const bx = q.sx * cS + q.sz * sS, by = q.sy, bz = -q.sx * sS + q.sz * cS;
       const wave = still ? 0 : Math.sin(q.gx * 0.011 + t * 1.5) * Math.cos(q.gy * 0.014 + t * 1.1) * 46;
       const gy = q.gy * cT - wave * sT, gz = q.gy * sT + wave * cT, gx = q.gx;
       let x = ax + (bx - ax) * e1, y = ay + (by - ay) * e1, z = az + (bz - az) * e1;
-      x += (gx - x) * e2; y += (gy - y) * e2; z += (gz - z) * e2;
-      const burst = Math.sin(Math.PI * e1) * 140 + Math.sin(Math.PI * e2) * 160;
+      x += (cxs - x) * e2; y += (cys - y) * e2; z += (czs - z) * e2;
+      x += (gx - x) * e3; y += (gy - y) * e3; z += (gz - z) * e3;
+      const burst = Math.sin(Math.PI * e1) * 140 + Math.sin(Math.PI * e2) * 120 + Math.sin(Math.PI * e3) * 160;
       x += q.dx * burst; y += q.dy * burst; z += q.dz * burst;
       let X = x * cY + z * sY, Z = -x * sY + z * cY;
       const Y0 = y * cX - Z * sX; Z = y * sX + Z * cX;
@@ -1196,19 +1216,24 @@ class Component extends DCLogic {
       }
       q.vx += -q.ox * 0.055; q.vy += -q.oy * 0.055; q.vx *= 0.84; q.vy *= 0.84; q.ox += q.vx; q.oy += q.vy;
       q.X = px0 + q.ox; q.Y = py0 + q.oy; q.Z = Z;
-      const r1 = rt + (rs - rt) * e1, rad = r1 + (rg - r1) * e2;
+      const r1 = rt + (rs - rt) * e1, r2 = r1 + ((st.sr ? 2.5 : 3.3) - r1) * e2, rad = r2 + (rg - r2) * e3;
       q.r = Math.max(0.6, rad * S * k * (q.type === 2 ? 0.7 : 1));
       const c0 = q.type === 1 ? [237, 110, 26] : q.type === 2 ? [120, 120, 112] : [246, 245, 230];
       const depth = this._c(0.5 - Z / (700 * S));
-      let c1, c2;
-      if (q.special === 1) { c1 = [237, 110, 26]; c2 = c1; }
-      else if (q.special === 2) { c1 = [65, 101, 244]; c2 = c1; }
+      let c1, c2, c3;
+      if (q.special === 1) { c1 = [237, 110, 26]; c2 = c1; c3 = c1; }
+      else if (q.special === 2) { c1 = [65, 101, 244]; c2 = c1; c3 = c1; }
       else {
         const sh = 0.28 + 0.72 * depth; c1 = [246 * sh, 245 * sh, 230 * sh];
+        if (!st.sr) { const bd = (0.86 + 0.14 * Math.sin(st.py * 0.09)) * (0.3 + 0.7 * depth); c3 = [248 * bd, 226 * bd, 190 * bd]; }
+        else if (st.band === 3) c3 = [65 * (0.6 + 0.4 * depth), 101 * (0.6 + 0.4 * depth), 244 * (0.6 + 0.4 * depth)];
+        else if (st.band === 2) c3 = [237 * (0.55 + 0.45 * depth), 110 * (0.55 + 0.45 * depth), 26 * (0.55 + 0.45 * depth)];
+        else { const rb = st.band === 0 ? 0.45 : 0.95; const v = rb * (0.45 + 0.55 * depth); c3 = [246 * v, 245 * v, 230 * v]; }
         const v0 = 0.5 + 0.5 * Math.sin(t * q.sp + q.ph), v = 0.14 + 0.86 * v0 * v0; c2 = [246 * v, 245 * v, 236 * v];
       }
-      const r_ = c0[0] + (c1[0] - c0[0]) * e1, g_ = c0[1] + (c1[1] - c0[1]) * e1, b_ = c0[2] + (c1[2] - c0[2]) * e1;
-      q.c = 'rgb(' + Math.round(r_ + (c2[0] - r_) * e2) + ',' + Math.round(g_ + (c2[1] - g_) * e2) + ',' + Math.round(b_ + (c2[2] - b_) * e2) + ')';
+      let r_ = c0[0] + (c1[0] - c0[0]) * e1, g_ = c0[1] + (c1[1] - c0[1]) * e1, b_ = c0[2] + (c1[2] - c0[2]) * e1;
+      r_ += (c3[0] - r_) * e2; g_ += (c3[1] - g_) * e2; b_ += (c3[2] - b_) * e2;
+      q.c = 'rgb(' + Math.round(r_ + (c2[0] - r_) * e3) + ',' + Math.round(g_ + (c2[1] - g_) * e3) + ',' + Math.round(b_ + (c2[2] - b_) * e3) + ')';
     }
     const ord = this.order; ord.sort((a, b) => P[b].Z - P[a].Z);
     for (let n = 0; n < ord.length; n++) {
