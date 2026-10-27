@@ -81,7 +81,7 @@ a{color:#F6F5E6}a:hover{color:#ED6E1A}
 .band canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 
 /* HERO */
-.hero{position:relative;height:calc(var(--vh) * 3.4);background:#0B0B0C}
+.hero{position:relative;height:calc(var(--vh) * 3);background:#0B0B0C}
 .hcv{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity 1.2s}
 .hero-top{position:absolute;top:92px;left:clamp(16px,3vw,40px);right:clamp(16px,3vw,40px);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:rgba(246,245,230,.75)}
 .hero-phase{position:absolute;right:clamp(16px,3vw,40px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;text-align:right}
@@ -318,7 +318,6 @@ a{color:#F6F5E6}a:hover{color:#ED6E1A}
         <span data-a="phase" style="opacity: 1; color: #ED6E1A">[01] Marca</span>
         <span data-a="phase">[02] Universo</span>
         <span data-a="phase">[03] Saturno</span>
-        <span data-a="phase">[04] Sistema</span>
       </div>
       <h1 class="hero-h xw">
         <span class="w" data-a="hw">Sua</span> <span class="w" data-a="hw">marca</span> <span class="w" data-a="hw">brilhando,</span> <span class="w" data-a="hw" style="opacity: .2">do</span> <span class="w" data-a="hw" style="opacity: .2">jeito</span> <span class="w" data-a="hw" style="opacity: .2">certo,</span> <span class="w" data-a="hw" style="opacity: .2">para</span> <span class="w" data-a="hw" style="opacity: .2">as</span> <span class="w" data-a="hw" style="opacity: .2">pessoas</span> <span class="w" data-a="hw" style="opacity: .2; color: #ED6E1A">certas.</span>
@@ -1157,7 +1156,7 @@ class Component extends DCLogic {
       const thr = j < 3 ? -1 : 0.03 + ((j - 3) / Math.max(1, n - 3)) * 0.4;
       this._set(E.hw[j], 'opacity', (0.2 + 0.8 * this._c((p - thr) * 8)).toFixed(2));
     }
-    const ph = p < 0.22 ? 0 : p < 0.46 ? 1 : p < 0.8 ? 2 : 3;
+    const ph = p < 0.24 ? 0 : p < 0.5 ? 1 : 2;
     E.phase.forEach((s, i) => { this._set(s, 'opacity', i === ph ? '1' : '0.3'); this._set(s, 'color', i === ph ? '#ED6E1A' : '#F6F5E6'); });
     this._dots(t, p, still);
   }
@@ -1171,7 +1170,7 @@ class Component extends DCLogic {
     const g = cv.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
     const S = Math.min(w * (w < 700 ? 0.9 : 0.74), 1180) / 1000;
     const cx = w / 2, cy = h * (w < 700 ? 0.44 : 0.47);
-    const m1g = this._c((p - 0.05) / 0.2), m2g = this._c((p - 0.3) / 0.2), m3g = this._c((p - 0.7) / 0.2);
+    const m1g = this._c((p - 0.05) / 0.22), m2g = this._c((p - 0.36) / 0.24), m3g = 0;
     const satRot = still ? 0 : t, cA = Math.cos(0.42), sA = Math.sin(0.42), cB = Math.cos(-0.36), sB = Math.sin(-0.36);
     const force = this.props.mouseForce == null ? 1 : +this.props.mouseForce;
     const mx = still ? 0 : this.m.snx * force, my = still ? 0 : this.m.sny * force;
