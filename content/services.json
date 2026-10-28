@@ -1,0 +1,40 @@
+{
+  "_nota": "Catálogo NÃO fechado. Os quatro grupos vêm do briefing (seção 6); serviços dentro de cada grupo são placeholders. Não criar escopos como se estivessem aprovados.",
+  "groups": [
+    {
+      "id": "diagnostico",
+      "label": "Diagnóstico",
+      "description": "Quiz gratuito do site e Raio-X Digital pago, com análise aprofundada, verificação técnica e humana.",
+      "services": [
+        { "slug": "raio-x-digital", "name": "Raio-X Digital", "status": "confirmado-conceito", "body": "[PLACEHOLDER — descrição, escopo e formato]", "cases": [] }
+      ]
+    },
+    {
+      "id": "infraestrutura",
+      "label": "Infraestrutura",
+      "description": "Implementação e correção de fatores técnicos e estruturais para os ambientes digitais funcionarem corretamente.",
+      "services": [
+        { "slug": "[PLACEHOLDER]", "name": "[PLACEHOLDER — serviço de infraestrutura]", "status": "pendente", "body": "", "cases": [] }
+      ]
+    },
+    {
+      "id": "sistemas",
+      "label": "Sistemas",
+      "description": "Sistemas de comunicação e produção automatizados ou semiautomatizados para o cliente operar canais com autonomia e qualidade.",
+      "services": [
+        { "slug": "[PLACEHOLDER]", "name": "[PLACEHOLDER — serviço de sistemas]", "status": "pendente", "body": "", "cases": [] }
+      ]
+    },
+    {
+      "id": "criacao",
+      "label": "Criação",
+      "description": "Projetos criativos de alto nível: identidade visual, naming, rebranding, identidade verbal, campanhas e outras soluções.",
+      "services": [
+        { "slug": "[PLACEHOLDER]", "name": "[PLACEHOLDER — serviço de criação]", "status": "pendente", "body": "", "cases": [] }
+      ]
+    }
+  ],
+  "servicePageTemplate": {
+    "sections": ["título e descrição objetiva", "o que entregamos", "para quem é", "cases relacionados (do site atual)", "CTA de contato", "voltar à jornada (se veio dela)"]
+  }
+}

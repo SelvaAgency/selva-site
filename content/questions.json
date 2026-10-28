@@ -1,0 +1,97 @@
+{
+  "interest": {
+    "status": "proposta",
+    "prompt": "O que você veio buscar por aqui?",
+    "options": [
+      { "id": "marca-identidade", "label": "Melhorar minha marca ou identidade visual", "relatedDimension": "marca", "serviceSlug": "[PLACEHOLDER — serviço de branding]" },
+      { "id": "criar-marca", "label": "Criar minha marca/produto", "relatedDimension": "marca", "serviceSlug": "[PLACEHOLDER — serviço de criação de marca]" },
+      { "id": "site", "label": "Ter um site melhor", "relatedDimension": "infra", "serviceSlug": "[PLACEHOLDER — serviço de site]" },
+      { "id": "clientes-vendas", "label": "Atrair mais clientes / vender mais", "relatedDimension": "performance", "serviceSlug": "[PLACEHOLDER — serviço de performance]" },
+      { "id": "estrategia", "label": "Melhorar minha estratégia digital", "relatedDimension": null, "serviceSlug": "[PLACEHOLDER — Raio-X Digital ou estratégia]" },
+      { "id": "nao-sei", "label": "Ainda não sei", "relatedDimension": null, "serviceSlug": null }
+    ]
+  },
+  "diagnostic": [
+    {
+      "id": "q1", "dimension": "infra", "status": "aprovado",
+      "prompt": "Seus ambientes digitais funcionam corretamente?",
+      "options": [
+        { "id": "a", "label": "Sim, e monitoramos regularmente", "value": 2 },
+        { "id": "b", "label": "Funcionam, mas apresentam falhas ocasionais", "value": 1 },
+        { "id": "c", "label": "Não temos certeza", "value": 0 }
+      ]
+    },
+    {
+      "id": "q2", "dimension": "infra", "status": "aprovado",
+      "prompt": "Sua empresa é facilmente encontrada nos mecanismos de busca?",
+      "options": [
+        { "id": "a", "label": "Sim", "value": 2 },
+        { "id": "b", "label": "Parcialmente", "value": 1 },
+        { "id": "c", "label": "Não sabemos", "value": 0 }
+      ]
+    },
+    {
+      "id": "q3", "dimension": "infra", "status": "aprovado",
+      "prompt": "Vocês monitoram o funcionamento de formulários, integrações e processos de compra ou contato?",
+      "options": [
+        { "id": "a", "label": "Sim, regularmente", "value": 2 },
+        { "id": "b", "label": "Apenas quando identificamos problemas", "value": 1 },
+        { "id": "c", "label": "Não", "value": 0 }
+      ]
+    },
+    {
+      "id": "q4", "dimension": "marca", "status": "aprovado",
+      "prompt": "Seus ambientes digitais representam bem a qualidade e o posicionamento da sua empresa?",
+      "options": [
+        { "id": "a", "label": "Sim, plenamente", "value": 2 },
+        { "id": "b", "label": "Em parte, temos pontos a melhorar", "value": 1 },
+        { "id": "c", "label": "Não, estão desatualizados ou desalinhados", "value": 0 }
+      ]
+    },
+    {
+      "id": "q5", "dimension": "marca", "status": "aprovado",
+      "prompt": "Os usuários conseguem entender com clareza o que sua empresa oferece?",
+      "options": [
+        { "id": "a", "label": "Sim", "value": 2 },
+        { "id": "b", "label": "Acreditamos que sim, mas nunca avaliamos", "value": 1 },
+        { "id": "c", "label": "Temos dificuldades de comunicação", "value": 0 }
+      ]
+    },
+    {
+      "id": "q6", "dimension": "marca", "status": "aprovado",
+      "prompt": "É fácil para os usuários realizarem ações como comprar, solicitar um orçamento ou entrar em contato?",
+      "options": [
+        { "id": "a", "label": "Sim, a jornada é simples e clara", "value": 2 },
+        { "id": "b", "label": "Existem pontos de dificuldade", "value": 1 },
+        { "id": "c", "label": "Não sabemos avaliar", "value": 0 }
+      ]
+    },
+    {
+      "id": "q7", "dimension": "performance", "status": "aprovado",
+      "prompt": "Sua empresa realiza ações recorrentes para atrair novos clientes pelos canais digitais?",
+      "options": [
+        { "id": "a", "label": "Sim, temos uma estratégia estruturada", "value": 2 },
+        { "id": "b", "label": "Realizamos ações pontuais, sem planejamento contínuo", "value": 1 },
+        { "id": "c", "label": "Ainda não exploramos esse potencial", "value": 0 }
+      ]
+    },
+    {
+      "id": "q8", "dimension": "performance", "status": "aprovado",
+      "prompt": "Vocês conseguem identificar quantas oportunidades e vendas são geradas pelas ações de marketing?",
+      "options": [
+        { "id": "a", "label": "Sim, acompanhamos indicadores claros", "value": 2 },
+        { "id": "b", "label": "Parcialmente, temos alguns dados", "value": 1 },
+        { "id": "c", "label": "Não temos essa visibilidade", "value": 0 }
+      ]
+    },
+    {
+      "id": "q9", "dimension": "performance", "status": "aprovado",
+      "prompt": "Os resultados das ações de marketing são utilizados para orientar as próximas decisões?",
+      "options": [
+        { "id": "a", "label": "Sim, analisamos e otimizamos continuamente", "value": 2 },
+        { "id": "b", "label": "Fazemos algumas análises, mas sem regularidade", "value": 1 },
+        { "id": "c", "label": "Não temos um processo estruturado de análise", "value": 0 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "_nota": "Regras v0 para o protótipo. PROPOSTA — validar com o Gui antes do lançamento. Textos condicionais são rascunhos estruturais; a redação final é do Gui.",
+  "status": "proposta",
+  "method": {
+    "valuePerAnswer": "a = 2, b = 1, c = 0 (ver questions.json)",
+    "dimensionScore": "média dos valores das perguntas respondidas na dimensão (0 a 2)",
+    "skipped": "pergunta pulada não entra na média",
+    "insufficientData": "se 2 ou mais perguntas da dimensão forem puladas, status = 'sem-dados'",
+    "thresholds": [
+      { "min": 1.5, "status": "bem-avaliada" },
+      { "min": 0.75, "status": "oportunidade" },
+      { "min": 0, "status": "atencao" }
+    ],
+    "display": "nunca exibir número; só o rótulo de status e o texto condicional",
+    "interestUse": "a dimensão ligada ao interesse escolhido na cena 0B aparece primeiro no panorama e define o CTA principal"
+  },
+  "statusLabels": {
+    "bem-avaliada": "Bem avaliada",
+    "oportunidade": "Oportunidade de evolução",
+    "atencao": "Ponto de atenção",
+    "sem-dados": "Sem respostas suficientes"
+  },
+  "disclaimer": {
+    "status": "proposta",
+    "text": "Este panorama é preliminar e se baseia exclusivamente nas respostas informadas. Ele não substitui uma análise técnica dos seus ambientes digitais."
+  },
+  "dimensions": {
+    "infra": {
+      "label": "Infraestrutura digital",
+      "texts": {
+        "bem-avaliada": "[PROPOSTA] Suas respostas indicam uma estrutura monitorada e funcional. O próximo passo é garantir que ela acompanhe o crescimento das ações de marketing.",
+        "oportunidade": "[PROPOSTA] Há sinais de que a estrutura funciona, mas sem acompanhamento constante. Falhas pontuais costumam passar despercebidas e custar oportunidades.",
+        "atencao": "[PROPOSTA] Suas respostas indicam pouca visibilidade sobre o funcionamento dos seus ambientes digitais. Esse costuma ser o ponto de partida mais rápido de corrigir e com maior efeito sobre os demais investimentos.",
+        "sem-dados": "[PROPOSTA] Não houve respostas suficientes para avaliar esta dimensão."
+      }
+    },
+    "marca": {
+      "label": "Marca e experiência",
+      "texts": {
+        "bem-avaliada": "[PROPOSTA] Suas respostas indicam que a presença digital representa bem a empresa e facilita a jornada do cliente.",
+        "oportunidade": "[PROPOSTA] Há pontos em que a apresentação ou a jornada podem não refletir a qualidade real do negócio. Vale avaliar com o olhar de quem chega pela primeira vez.",
+        "atencao": "[PROPOSTA] Suas respostas indicam desalinhamento entre o que a empresa é e o que os ambientes digitais comunicam. Isso pode afastar clientes mesmo quando há interesse.",
+        "sem-dados": "[PROPOSTA] Não houve respostas suficientes para avaliar esta dimensão."
+      }
+    },
+    "performance": {
+      "label": "Ativação e performance",
+      "texts": {
+        "bem-avaliada": "[PROPOSTA] Suas respostas indicam ações estruturadas e orientadas por indicadores. O desafio passa a ser escalar com eficiência.",
+        "oportunidade": "[PROPOSTA] Existem ações em andamento, mas sem continuidade ou leitura consistente dos resultados. Há espaço para transformar esforço pontual em resultado previsível.",
+        "atencao": "[PROPOSTA] Suas respostas indicam que os canais digitais ainda não são explorados de forma estruturada para gerar negócios.",
+        "sem-dados": "[PROPOSTA] Não houve respostas suficientes para avaliar esta dimensão."
+      }
+    }
+  }
+}
