@@ -30,8 +30,8 @@
   --selva-shadow-a40: rgba(0,0,0,.4);
 
   /* ============ TIPOGRAFIA ============ */
-  --font-sans: 'Archivo', Arial, sans-serif;           /* variável: wdth 62–125, wght 100–900 */
-  --font-mono: 'Space Mono', ui-monospace, monospace;  /* 400 / 700 */
+  --font-sans: var(--font-archivo, 'Archivo'), Arial, sans-serif; /* variável: wdth 62–125, wght 100–900 */
+  --font-mono: var(--font-space-mono, 'Space Mono'), ui-monospace, monospace; /* 400 / 700 */
 
   /* Display (manchetes) — Archivo 900, expandido */
   --display-weight: 900;

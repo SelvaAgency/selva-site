@@ -1,0 +1,68 @@
+{
+  "_nota": "Rótulos de interface (botões, navegação, mensagens de sistema). Nenhum texto de cena aqui. status: proposta — ajustes só com o Gui.",
+  "status": "proposta",
+  "brand": { "name": "Selva", "legalName": "Selva Agency", "city": "São Paulo", "since": "2014" },
+  "meta": {
+    "title": "Selva — Oportunidades para o seu negócio no digital",
+    "description": "Uma jornada consultiva para identificar oportunidades na presença digital da sua empresa. Selva Agency, São Paulo."
+  },
+  "nav": {
+    "skipToContent": "Ir para o conteúdo",
+    "backToJourney": "Voltar à jornada",
+    "home": "Início",
+    "services": "Serviços",
+    "projects": "Projetos",
+    "contact": "Contato"
+  },
+  "journey": {
+    "scrollHint": "Role para continuar",
+    "skipQuestion": "Pular esta pergunta",
+    "skipped": "Pergunta pulada",
+    "answered": "Resposta registrada",
+    "back": "Voltar",
+    "continue": "Continuar",
+    "restart": "Recomeçar jornada",
+    "progressLabel": "Progresso da jornada",
+    "sceneLabel": "Cena"
+  },
+  "panorama": {
+    "title": "Panorama preliminar",
+    "dimensionLabel": "Dimensão",
+    "statusLabel": "Avaliação",
+    "yourInterest": "Seu interesse inicial",
+    "noInterest": "Interesse não informado"
+  },
+  "contact": {
+    "title": "Conversar com a Selva",
+    "placeholder": "[PLACEHOLDER — formulário de contato. Fluxo de e-mail e consentimento pendentes (decisões 5 e 6).]",
+    "consentNotice": "[PLACEHOLDER — texto de consentimento LGPD]"
+  },
+  "service": {
+    "whatWeDeliver": "O que entregamos",
+    "forWhom": "Para quem é",
+    "relatedCases": "Projetos relacionados",
+    "cta": "Falar sobre este serviço",
+    "allServices": "Todos os serviços",
+    "notFound": "Serviço não encontrado."
+  },
+  "projects": {
+    "title": "Projetos",
+    "intro": "[PLACEHOLDER — texto de abertura da Rota B. Formato a confirmar (decisão 1).]",
+    "caseKind": "Tipo de projeto",
+    "openCase": "Ver projeto"
+  },
+  "placeholders": {
+    "scene": "[PLACEHOLDER — cena {name}]",
+    "caseImage": "[PLACEHOLDER — imagem do case]",
+    "metric": "[PLACEHOLDER — métrica verificável]"
+  },
+  "a11y": {
+    "reducedMotionNotice": "Animações reduzidas conforme a preferência do seu sistema.",
+    "choiceGroup": "Escolhas",
+    "questionGroup": "Pergunta {n} de {total}"
+  },
+  "dev": {
+    "prototypeBadge": "Protótipo cinza — Fase 2",
+    "placeholderPage": "Página em construção."
+  }
+}
