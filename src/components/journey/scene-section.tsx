@@ -87,7 +87,7 @@ export const SceneSection = forwardRef<HTMLElement, SceneSectionProps>(function 
       style={{ ['--n' as string]: n }}
     >
       <div className="scene__pin">
-        <SceneAsset scene={scene} shouldLoad={shouldLoad} progressRef={assetRef} />
+        <SceneAsset scene={scene} shouldLoad={shouldLoad} progressRef={assetRef} reduced={reduced} />
         <div className="scene__content">{items}</div>
       </div>
     </section>

@@ -236,6 +236,22 @@
 .journey[data-light='clara'] .hud--top { color: var(--selva-ink); }
 .journey[data-light='clara'] .hud--top .btn:hover { background: var(--selva-ink); color: var(--selva-paper); }
 
+/* --- Palco fixo de vídeo: um só, atrás das cenas; nunca rola --- */
+.video-stage { position: fixed; inset: 0; z-index: 0; background: #1a1b1d; }
+.video-stage .scene-asset { position: absolute; inset: 0; visibility: hidden; }
+.video-stage .scene-asset[data-active='true'] { visibility: visible; }
+.journey > main { position: relative; z-index: 1; }
+.scene-asset--poster { background: #1a1b1d center / cover no-repeat; }
+
+/* Camada de gradientes da seção quando o vídeo está no palco (mesmos gradientes do asset) */
+.scene-overlay { position: relative; z-index: 1; }
+.scene-overlay::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(11,11,12,.75), rgba(11,11,12,.15) 55%, transparent);
+  opacity: .85;
+}
+
 /* --- Assets reais (vídeo ou frames): preenchem o pin, recorte central --- */
 .scene-asset--video, .scene-asset--frames { background: #1a1b1d center / cover no-repeat; }
 .scene-asset__media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; display: block; }
@@ -244,7 +260,8 @@
    Entra só no último quarto do asset (quando o texto está para aparecer), para a emenda com a cena anterior
    continuar idêntica no primeiro quadro. */
 @media (max-width: 760px) {
-  .scene[data-scrim='forte'] .scene-asset::before {
+  .scene[data-scrim='forte'] .scene-asset::before,
+  .scene[data-scrim='forte'] .scene-overlay::before {
     content: '';
     position: absolute; inset: 0; z-index: 1;
     background: linear-gradient(to top, rgba(11,11,12,.92), rgba(11,11,12,.7) 45%, rgba(11,11,12,.25) 75%, transparent);

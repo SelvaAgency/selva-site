@@ -17,6 +17,9 @@ export type VideoScrubAssetProps = {
   poster?: string;
   shouldLoad: boolean;
   onMetrics?: (m: AssetMetrics) => void;
+  /** no palco: id da cena (o motor encontra o clipe por [data-clip]) e visibilidade inicial */
+  clipId?: string;
+  active?: boolean;
 };
 
 /** MIME com codecs, para o navegador descartar fontes sem decodificador antes de baixar */
@@ -32,7 +35,7 @@ export function mimeFor(v: VideoEntry): string {
  * Técnica A: <video> mudo com playsinline; o scroll define currentTime.
  * Só um seek em voo por vez: o último alvo pedido é aplicado quando o anterior termina.
  */
-export function VideoScrubAsset({ video, sources, poster, shouldLoad, onMetrics }: VideoScrubAssetProps) {
+export function VideoScrubAsset({ video, sources, poster, shouldLoad, onMetrics, clipId, active }: VideoScrubAssetProps) {
   const root = useRef<HTMLDivElement | null>(null);
   const el = useRef<VideoEl | null>(null);
   const m = useRef<AssetMetrics>(newMetrics('video', video.id + '-' + video.variant, video.bytes));
@@ -105,7 +108,7 @@ export function VideoScrubAsset({ video, sources, poster, shouldLoad, onMetrics 
   }, [shouldLoad]);
 
   return (
-    <div ref={root} className="scene-asset scene-asset--video" data-loaded={shouldLoad} aria-hidden="true">
+    <div ref={root} className="scene-asset scene-asset--video" data-loaded={shouldLoad} data-clip={clipId} data-active={clipId ? !!active : undefined} aria-hidden="true">
       <video
         ref={el}
         className="scene-asset__media"

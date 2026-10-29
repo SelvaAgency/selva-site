@@ -10,6 +10,7 @@ import { track } from '@/lib/events';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useJourney } from '@/state/journey';
 import { JourneyHud } from './journey-hud';
+import { VideoStage } from './video-stage';
 import { SceneSection } from './scene-section';
 import './journey.css';
 
@@ -27,8 +28,23 @@ function setLight(section: HTMLElement, light: string, isCurrent: boolean) {
 function applyProgress(section: HTMLElement, progress: number, index: number, isCurrent: boolean) {
   const scene = sceneList[index];
   setLight(section, lightAt(scene, progress), isCurrent);
-  const asset = section.querySelector<HTMLElement>('.scene-asset');
-  if (asset) emitSceneProgress(asset, assetProgress(scene, progress));
+  const ap = assetProgress(scene, progress);
+  // placeholder dentro da seção, ou camada de gradientes quando o vídeo está no palco
+  const asset = section.querySelector<HTMLElement>('.scene-asset, .scene-overlay');
+  if (asset) emitSceneProgress(asset, ap);
+  // palco fixo: progresso vai para o clipe desta cena; a cena corrente define qual clipe aparece
+  if (scene.asset?.kind === 'video') {
+    const clip = document.querySelector<HTMLElement>(`.video-stage [data-clip="${scene.id}"]`);
+    if (clip) {
+      emitSceneProgress(clip, ap);
+      if (isCurrent) {
+        document.querySelectorAll<HTMLElement>('.video-stage [data-clip]').forEach((c) => {
+          const on = c === clip ? 'true' : 'false';
+          if (c.dataset.active !== on) c.dataset.active = on;
+        });
+      }
+    }
+  }
   const blocks = section.querySelectorAll<HTMLElement>('.block');
   const n = blocks.length;
   const active = activeUnit(progress, n, scene.leadIn);
@@ -152,6 +168,7 @@ export function JourneyExperience({ panoramaSlot, casesSlot }: JourneyExperience
 
   return (
     <div className="journey" data-reduced={reduced} data-light="escura">
+      {hydrated && !reduced && <VideoStage />}
       <JourneyHud onRestart={onRestart} onTop={() => scrollToScene('s0')} />
       <main id="conteudo">
         {scenes.map((scene, i) => (

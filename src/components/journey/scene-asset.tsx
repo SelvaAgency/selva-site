@@ -2,7 +2,7 @@
 import { useEffect, useRef } from 'react';
 import { sceneNumber, ui } from '@/content';
 import type { Scene } from '@/content/types';
-import { VideoSceneAsset } from './assets/video-scene-asset';
+import { PosterAsset } from './assets/poster-asset';
 
 /**
  * API de asset de cena. O mesmo contrato serve para placeholder, sequência de frames e vídeo:
@@ -15,14 +15,20 @@ export type SceneAssetProps = {
   scene: Scene;
   kind?: SceneAssetKind;
   shouldLoad: boolean;
+  /** movimento reduzido: sem palco, cada cena mostra o pôster */
+  reduced?: boolean;
   /** ref para o motor escrever `--p` (progresso) sem passar pelo React */
   progressRef?: React.RefObject<HTMLDivElement | null>;
 };
 
-export function SceneAsset({ scene, kind, shouldLoad, progressRef }: SceneAssetProps) {
+export function SceneAsset({ scene, kind, shouldLoad, progressRef, reduced }: SceneAssetProps) {
   const k = kind ?? scene.asset?.kind ?? 'placeholder';
   const placeholder = <PlaceholderAsset scene={scene} shouldLoad={shouldLoad} progressRef={progressRef} />;
-  if (k === 'video') return <VideoSceneAsset scene={scene} shouldLoad={shouldLoad} fallback={placeholder} />;
+  if (k === 'video') {
+    if (reduced) return <PosterAsset scene={scene} fallback={placeholder} />;
+    // com movimento, o vídeo vive no palco fixo (VideoStage); a seção só carrega a camada de gradientes
+    return <div className="scene-overlay" data-scene={scene.id} aria-hidden="true" />;
+  }
   // frames na jornada principal: só se o teste no iPhone apontar para eles (Fase 3)
   return placeholder;
 }

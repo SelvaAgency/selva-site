@@ -82,13 +82,19 @@
     {
       "id": "s1",
       "name": "Pergunta de abertura da caminhada",
-      "visual": "Entrada no ambiente denso; movimento sutil, tempo para reflexão.",
+      "visual": "Câmera continua do macro da folha (T04, K03→K04) e entra no ambiente denso; movimento sutil, tempo para reflexão. A pergunta aparece quando o trecho termina. Emenda contínua com o fim da 0B.",
       "blocks": [
         {
           "text": "Sua presença digital está à altura do seu negócio?",
           "status": "aprovado"
         }
-      ]
+      ],
+      "asset": {
+        "kind": "video",
+        "id": "cena1",
+        "span": 0.6
+      },
+      "leadIn": 0.6
     },
     {
       "id": "s2",
