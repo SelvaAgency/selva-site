@@ -250,7 +250,10 @@
   position: absolute; inset: 0;
   background: linear-gradient(to top, rgba(11,11,12,.75), rgba(11,11,12,.15) 55%, transparent);
   opacity: .85;
+  transition: opacity var(--dur-wipe) var(--ease-in-out);
 }
+/* luz clara: o escurecimento ink some e o scrim creme (scene__content::before) assume */
+.scene[data-light='clara'] .scene-overlay::after { opacity: 0; }
 
 /* --- Assets reais (vídeo ou frames): preenchem o pin, recorte central --- */
 .scene-asset--video, .scene-asset--frames { background: #1a1b1d center / cover no-repeat; }

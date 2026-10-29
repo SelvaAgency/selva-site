@@ -142,7 +142,7 @@
       "id": "s3",
       "name": "Marca e experiência digital",
       "dimension": "marca",
-      "visual": "Ambiente aberto, surpreendente, com luz e respiro. Recompensa visual independente do texto.",
+      "visual": "Da passagem iluminada (fim do T05) a câmera chega à clareira (T06, K06→K07): ambiente aberto, surpreendente, com luz e respiro. O vídeo se distribui pelos quatro blocos de texto e segura o último quadro sob as perguntas 4 a 6. Quadro claro do início ao fim: luz clara (texto escuro com degradê creme), como na cena 0. Recompensa visual independente do texto.",
       "blocks": [
         {
           "text": "Quando os usuários chegam aos ambientes digitais de uma empresa, a experiência que encontram influencia diretamente a percepção que constroem sobre o negócio.",
@@ -168,7 +168,13 @@
             "q6"
           ]
         }
-      ]
+      ],
+      "asset": {
+        "kind": "video",
+        "id": "cena3",
+        "span": 0.606
+      },
+      "light": "clara"
     },
     {
       "id": "s4",
