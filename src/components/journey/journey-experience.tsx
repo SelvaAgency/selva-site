@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { sceneIndex, sceneList } from '@/content';
-import { activeUnit, lightAt } from '@/lib/scene-light';
+import { activeUnit, assetProgress, lightAt } from '@/lib/scene-light';
 import { emitSceneProgress } from './assets/use-scene-progress';
 import { track } from '@/lib/events';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
@@ -25,12 +25,13 @@ function setLight(section: HTMLElement, light: string, isCurrent: boolean) {
 }
 
 function applyProgress(section: HTMLElement, progress: number, index: number, isCurrent: boolean) {
-  setLight(section, lightAt(sceneList[index], progress), isCurrent);
+  const scene = sceneList[index];
+  setLight(section, lightAt(scene, progress), isCurrent);
   const asset = section.querySelector<HTMLElement>('.scene-asset');
-  if (asset) emitSceneProgress(asset, progress);
+  if (asset) emitSceneProgress(asset, assetProgress(scene, progress));
   const blocks = section.querySelectorAll<HTMLElement>('.block');
   const n = blocks.length;
-  const active = activeUnit(progress, n);
+  const active = activeUnit(progress, n, scene.leadIn);
   blocks.forEach((b, i) => {
     const state = i === active ? 'active' : i < active ? 'past' : 'future';
     if (b.dataset.state !== state) b.dataset.state = state;

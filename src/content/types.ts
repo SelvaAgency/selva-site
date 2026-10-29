@@ -23,8 +23,13 @@ export type Scene = {
   dimension?: Dimension;
   /** luz: define cor do texto, scrim e HUD; pode mudar no meio da cena. Padrão: escura */
   light?: SceneLightSpec;
-  /** asset real da cena (manifest em public/scenes/<id>); sem isso, placeholder */
-  asset?: { kind: 'video' | 'frames'; id: string };
+  /** asset real da cena (manifest em public/scenes/<id>); sem isso, placeholder.
+   *  span: fração do progresso da cena em que o asset roda do início ao fim (padrão 1); depois segura o último quadro */
+  asset?: { kind: 'video' | 'frames'; id: string; span?: number };
+  /** fração da cena antes do primeiro bloco (padrão 0.08): dá tempo ao asset antes do texto */
+  leadIn?: number;
+  /** 'forte' reforça o degradê atrás do texto no mobile (quando a área calma do quadro some no recorte vertical) */
+  scrim?: 'forte';
   visual: string;
   blocks: SceneBlock[];
   choices?: Choices;

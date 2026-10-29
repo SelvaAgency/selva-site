@@ -1,5 +1,5 @@
 {
-  "_nota": "Textos copiados do Briefing Mestre v01. 'status' por bloco: aprovado (não alterar), conceito (aprovado em conceito, ajustes só com o Gui), proposta (não revisado). Cada item de 'blocks' aparece separado ao longo do scroll. 'light': luz da cena — string ('clara' | 'escura') ou transição por posição de scroll {from, to, switchAt (0–1)}. A luz define cor do texto, scrim e HUD; muda no meio da cena, não só entre cenas. 'asset': {kind: 'video', id} liga a cena aos assets gerados em public/scenes/<id> (manifest.json); sem 'asset', placeholder.",
+  "_nota": "Textos copiados do Briefing Mestre v01. 'status' por bloco: aprovado (não alterar), conceito (aprovado em conceito, ajustes só com o Gui), proposta (não revisado). Cada item de 'blocks' aparece separado ao longo do scroll. 'light': luz da cena — string ('clara' | 'escura') ou transição por posição de scroll {from, to, switchAt (0–1)}. A luz define cor do texto, scrim e HUD; muda no meio da cena, não só entre cenas. 'asset': {kind: 'video', id} liga a cena aos assets gerados em public/scenes/<id> (manifest.json); sem 'asset', placeholder. 'leadIn': fração da cena antes do primeiro bloco (padrão 0.08). 'asset.span': fração da cena em que o vídeo roda inteiro (depois segura o último quadro). 'scrim': 'forte' reforça o degradê atrás do texto no mobile.",
   "scenes": [
     {
       "id": "s0",
@@ -44,7 +44,7 @@
     {
       "id": "s0b",
       "name": "Interesse e convite à jornada",
-      "visual": "Câmera avança; pequena recompensa visual entre as duas decisões. Não empilhar duas perguntas sem movimento.",
+      "visual": "Câmera avança do solo até o macro de uma folha (T03, K02→K03); a pergunta de interesse aparece quando o vídeo chega ao macro. Pequena recompensa visual entre as duas decisões. Emenda contínua com o fim da cena 0: primeiro quadro do T03 = último do T02, sem corte nem fade.",
       "blocks": [
         {
           "type": "interest",
@@ -70,7 +70,14 @@
             "goTo": "/servicos/{interest.serviceSlug}"
           }
         ]
-      }
+      },
+      "asset": {
+        "kind": "video",
+        "id": "cena0b",
+        "span": 0.4
+      },
+      "leadIn": 0.4,
+      "scrim": "forte"
     },
     {
       "id": "s1",
