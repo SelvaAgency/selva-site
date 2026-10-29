@@ -33,6 +33,11 @@ export const publishedServices: Service[] = services.groups
 
 export const serviceBySlug = (slug: string): Service | undefined => publishedServices.find((s) => s.slug === slug);
 
+/** Número da cena como no briefing: s0 → "0", s0b → "0B", s1 → "1". */
+export function sceneNumber(id: string): string {
+  return id.replace(/^s/, '').toUpperCase();
+}
+
 export function sceneIndex(id: string): number {
   return sceneList.findIndex((s) => s.id === id);
 }
