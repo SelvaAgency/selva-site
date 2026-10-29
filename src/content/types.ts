@@ -14,13 +14,15 @@ export type Choice = { id: string; label: string; goTo: string };
 export type Choices = { status: ApprovalStatus; options: Choice[] };
 
 export type SceneLight = 'clara' | 'escura';
+/** Luz constante ou transição por posição de scroll (switchAt em progresso 0–1 da cena). */
+export type SceneLightSpec = SceneLight | { from: SceneLight; to: SceneLight; switchAt: number };
 
 export type Scene = {
   id: string;
   name: string;
   dimension?: Dimension;
-  /** luz da cena: define cor do texto, scrim e HUD. Padrão: escura */
-  light?: SceneLight;
+  /** luz: define cor do texto, scrim e HUD; pode mudar no meio da cena. Padrão: escura */
+  light?: SceneLightSpec;
   visual: string;
   blocks: SceneBlock[];
   choices?: Choices;

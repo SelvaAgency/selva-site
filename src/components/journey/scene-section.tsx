@@ -9,6 +9,7 @@ import {
   isTextBlock,
   type Scene,
 } from '@/content/types';
+import { lightAt, lightForUnit } from '@/lib/scene-light';
 import { SceneAsset } from './scene-asset';
 import { ChoiceGroup, InterestPicker, QuestionBlock, TextBlock } from './blocks';
 
@@ -45,7 +46,7 @@ export const SceneSection = forwardRef<HTMLElement, SceneSectionProps>(function 
   const items: React.ReactNode[] = [];
   const push = (node: React.ReactNode, key: string, kind: string) => {
     items.push(
-      <div key={key} className="block" data-unit={unit} data-kind={kind}>
+      <div key={key} className="block" data-unit={unit} data-kind={kind} data-light={lightForUnit(scene, unit, n)}>
         {node}
       </div>,
     );
@@ -80,7 +81,7 @@ export const SceneSection = forwardRef<HTMLElement, SceneSectionProps>(function 
       data-scene={scene.id}
       data-index={index}
       data-reduced={reduced}
-      data-light={scene.light ?? 'escura'}
+      data-light={lightAt(scene, 0)}
       aria-label={label}
       style={{ ['--n' as string]: n }}
     >

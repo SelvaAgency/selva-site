@@ -18,7 +18,9 @@ const spaceMono = Space_Mono({
   display: 'swap',
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+// Vercel expõe o domínio de produção e o da preview; o .env local cobre o resto
+const vercelHost = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? (vercelHost ? `https://${vercelHost}` : 'http://localhost:3000');
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
