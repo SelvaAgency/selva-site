@@ -85,7 +85,7 @@ export const SceneSection = forwardRef<HTMLElement, SceneSectionProps>(function 
       data-scrim={scene.scrim}
       data-qbg={scene.questionsBackdrop}
       aria-label={label}
-      style={{ ['--n' as string]: n }}
+      style={{ ['--n' as string]: n, ['--scroll-scale' as string]: scene.scrollScale ?? 1 }}
     >
       <div className="scene__pin">
         <SceneAsset scene={scene} shouldLoad={shouldLoad} progressRef={assetRef} reduced={reduced} />

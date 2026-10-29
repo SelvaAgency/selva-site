@@ -42,6 +42,13 @@ describe('luz por posição de scroll', () => {
     expect(s3.asset?.span).toBeCloseTo(unitStart(4, 7), 2);
     expect(activeUnit(s3.asset!.span!, 7)).toBe(4);
   });
+  it('cena 4: clara, dois trechos num clipe só, vídeo termina onde a pergunta 7 começa', () => {
+    const s4 = scenes.scenes[5];
+    expect(lightAt(s4, 0.5)).toBe('clara');
+    expect(s4.asset?.span).toBeCloseTo(unitStart(5, 8), 2);
+    expect(activeUnit(s4.asset!.span!, 8)).toBe(5);
+    expect(s4.scrollScale).toBeGreaterThan(1);
+  });
   it('activeUnit e unitStart são consistentes', () => {
     for (let u = 0; u < 3; u++) expect(activeUnit(unitStart(u, 3) + 0.001, 3)).toBe(u);
     expect(activeUnit(0.01, 3)).toBe(-1);

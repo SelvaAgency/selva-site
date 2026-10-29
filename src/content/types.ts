@@ -32,6 +32,8 @@ export type Scene = {
   scrim?: 'forte';
   /** 'painel' dá às perguntas um fundo próprio escuro (quando o quadro atrás é claro) */
   questionsBackdrop?: 'painel';
+  /** multiplica a altura de scroll da cena (padrão 1): mais scroll por segundo de vídeo quando o trecho é curto */
+  scrollScale?: number;
   visual: string;
   blocks: SceneBlock[];
   choices?: Choices;

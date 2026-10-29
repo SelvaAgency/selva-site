@@ -1,5 +1,5 @@
 {
-  "_nota": "Textos copiados do Briefing Mestre v01. 'status' por bloco: aprovado (não alterar), conceito (aprovado em conceito, ajustes só com o Gui), proposta (não revisado). Cada item de 'blocks' aparece separado ao longo do scroll. 'light': luz da cena — string ('clara' | 'escura') ou transição por posição de scroll {from, to, switchAt (0–1)}. A luz define cor do texto, scrim e HUD; muda no meio da cena, não só entre cenas. 'asset': {kind: 'video', id} liga a cena aos assets gerados em public/scenes/<id> (manifest.json); sem 'asset', placeholder. 'leadIn': fração da cena antes do primeiro bloco (padrão 0.08). 'asset.span': fração da cena em que o vídeo roda inteiro (depois segura o último quadro). 'scrim': 'forte' reforça o degradê atrás do texto no mobile. 'questionsBackdrop': 'painel' dá às perguntas um fundo próprio escuro (quadro claro atrás).",
+  "_nota": "Textos copiados do Briefing Mestre v01. 'status' por bloco: aprovado (não alterar), conceito (aprovado em conceito, ajustes só com o Gui), proposta (não revisado). Cada item de 'blocks' aparece separado ao longo do scroll. 'light': luz da cena — string ('clara' | 'escura') ou transição por posição de scroll {from, to, switchAt (0–1)}. A luz define cor do texto, scrim e HUD; muda no meio da cena, não só entre cenas. 'asset': {kind: 'video', id} liga a cena aos assets gerados em public/scenes/<id> (manifest.json); sem 'asset', placeholder. 'leadIn': fração da cena antes do primeiro bloco (padrão 0.08). 'asset.span': fração da cena em que o vídeo roda inteiro (depois segura o último quadro). 'scrim': 'forte' reforça o degradê atrás do texto no mobile. 'questionsBackdrop': 'painel' dá às perguntas um fundo próprio escuro (quadro claro atrás). 'scrollScale': multiplica a altura de scroll da cena (padrão 1) quando o trecho é curto e o movimento ficaria apressado.",
   "scenes": [
     {
       "id": "s0",
@@ -180,7 +180,7 @@
       "id": "s4",
       "name": "Ativação e performance",
       "dimension": "performance",
-      "visual": "Câmera revela caminhos; um deles se abre até uma praia tropical. Visual comunica expansão.",
+      "visual": "Da clareira (fim do T06) a câmera atravessa até a borda da mata (T07, K07→K08) e segue pela abertura até a praia (T08, K08→K09). Os dois trechos tocam em sequência: T07 sob os primeiros blocos de texto, T08 sob os seguintes; o último quadro do T08, a praia, fica parado sob as perguntas 7 a 9. Cena toda em luz clara (texto escuro), como na cena 3. A emenda T07→T08 tem um salto conhecido (a névoa some), mantido sem corte nem fade até a versão oficial. Scroll alongado (scrollScale) para os trechos de 5 s não correrem.",
       "blocks": [
         {
           "text": "Ter ambientes digitais funcionando corretamente e uma marca bem apresentada são condições fundamentais. Mas isso, por si só, não garante que novas oportunidades de negócio sejam geradas.",
@@ -210,7 +210,14 @@
             "q9"
           ]
         }
-      ]
+      ],
+      "asset": {
+        "kind": "video",
+        "id": "cena4",
+        "span": 0.655
+      },
+      "light": "clara",
+      "scrollScale": 1.5
     },
     {
       "id": "s5",

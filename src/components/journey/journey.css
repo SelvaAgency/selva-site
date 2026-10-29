@@ -5,8 +5,8 @@
 /* --- Cena --- */
 .scene {
   position: relative;
-  /* uma viewport por unidade de scroll + uma de folga para o lead-in/saída */
-  height: calc(var(--n, 1) * 85svh + 100svh);
+  /* uma viewport por unidade de scroll (× scrollScale) + uma de folga para o lead-in/saída */
+  height: calc(var(--n, 1) * 85svh * var(--scroll-scale, 1) + 100svh);
 }
 .scene__pin {
   position: sticky;
