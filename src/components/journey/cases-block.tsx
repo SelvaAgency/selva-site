@@ -11,7 +11,7 @@ export function CasesBlock() {
       <ul className="cases-strip__list">
         {cases.cases.map((c, i) => (
           <li key={c.slug}>
-            <Link href={`/projetos#${c.slug}`} className="cases-strip__link">
+            <Link href={`/projetos#${c.slug}`} className="case-link">
               <CaseCard item={c} priority={i < 2} />
             </Link>
           </li>

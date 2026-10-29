@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import type { CaseItem } from '@/content/types';
+import './case-card.css';
 
 /** Card de case com as cores do site atual. `priority` só para os primeiros visíveis. */
 export function CaseCard({ item, priority = false, sizes = '(max-width: 760px) 60vw, 250px' }: { item: CaseItem; priority?: boolean; sizes?: string }) {

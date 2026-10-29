@@ -1,0 +1,8 @@
+/* Card de case — compartilhado entre a jornada e as rotas internas */
+.case-link { text-decoration: none; display: block; color: inherit; }
+.case-link:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); border-radius: var(--radius-m); }
+.case-card { width: var(--card-w); display: grid; gap: var(--space-3); color: inherit; }
+.case-card__media { position: relative; aspect-ratio: var(--card-aspect); border-radius: var(--radius-m); overflow: hidden; background: var(--case-bg); }
+.case-card__name { font-size: clamp(16px, 1.4vw, 22px); margin: 0; }
+.case-card__kind { margin: 0; opacity: .7; }
+.case-link:hover .case-card__media { outline: var(--border) solid var(--case-bg); outline-offset: 2px; }

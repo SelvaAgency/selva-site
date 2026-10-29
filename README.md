@@ -21,3 +21,11 @@ npm run lint
 - `src/app/` — rotas (App Router).
 - `legacy/` — site atual, apenas referência visual.
 - `docs/` — briefing, decisões, tokens.
+- `src/components/journey/` — motor de scroll, cenas, blocos, HUD.
+- `src/lib/panorama.ts` — cálculo puro do panorama (testado).
+- `src/state/journey.ts` — estado da jornada (Zustand, sessionStorage).
+- `src/lib/events/` — eventos de funil; adapter mock no console.
+
+## Estado da Fase 2
+
+Protótipo cinza navegável: cenas 0 a 8, escolhas, 9 perguntas com Pular, panorama e cases; rotas `/servicos`, `/servicos/raio-x-digital`, `/projetos`, `/contato`. Verificado no Chromium em iPhone 13, desktop e `prefers-reduced-motion`. Pendências em `docs/decisions.md`.
