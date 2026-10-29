@@ -27,6 +27,10 @@ export type AssetMetrics = {
   avgDecodeMs: number | null;
   /** bitmaps mantidos em memória no momento (frames) */
   residentFrames?: number;
+  /** atraso máximo só nos pedidos cujo quadro já estava baixado (frames): mede decodificação, não rede */
+  maxLagLoaded?: number;
+  /** pedidos de quadro ainda não baixado (frames) */
+  missesNotLoaded?: number;
 };
 
 export function newMetrics(technique: AssetMetrics['technique'], variantId: string, bytesTotal: number): AssetMetrics {

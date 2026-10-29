@@ -95,7 +95,9 @@
       "dpr": "DPR",
       "viewport": "viewport",
       "ua": "navegador",
-      "lowPower": "economia de energia"
+      "lowPower": "economia de energia",
+      "lagLoaded": "atraso máx. com quadro baixado",
+      "misses": "pedidos antes do download"
     },
     "copy": "Copiar relatório",
     "copied": "Relatório copiado. Cole na conversa.",

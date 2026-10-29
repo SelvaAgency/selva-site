@@ -69,6 +69,8 @@ for (const [variant, vf] of [['desktop', desktopVf], ['mobile', mobileVf]]) {
   encode('h264-gop1', variant, vf, ['-c:v', 'libx264', '-preset', 'fast', '-crf', '23', '-g', '1', '-keyint_min', '1', '-bf', '0', '-profile:v', 'high']);
   // HEVC para Safari (hvc1), mesmo GOP curto
   encode('hevc-gop6', variant, vf, ['-c:v', 'libx265', '-preset', 'fast', '-crf', '26', '-x265-params', 'keyint=6:min-keyint=6:bframes=0', '-tag:v', 'hvc1']);
+  // VP9/WebM: Chromium e Android (e validação em headless, que não tem H.264). Só mobile, por tempo de encode.
+  if (variant === 'mobile' && !args.includes('--no-vp9')) encode('vp9-gop6', variant, vf, ['-c:v', 'libvpx-vp9', '-crf', '32', '-b:v', '0', '-g', '6', '-keyint_min', '6', '-deadline', 'good', '-cpu-used', '4', '-row-mt', '1'], 'webm');
 }
 
 // 2) sequência de frames em WebP

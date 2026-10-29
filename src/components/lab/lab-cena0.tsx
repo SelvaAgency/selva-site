@@ -191,7 +191,7 @@ export function LabCena0() {
           <dt>{L.firstFrame}</dt><dd>{metrics?.firstFrameMs != null ? Math.round(metrics.firstFrameMs) : nd}</dd>
           <dt>{L.bytes}</dt><dd>{metrics ? `${fmtMb(metrics.bytesLoaded)} / ${fmtMb(metrics.bytesTotal)} MB` : nd}</dd>
           <dt>{L.decode}</dt><dd>{metrics?.avgDecodeMs != null ? metrics.avgDecodeMs.toFixed(1) : nd}</dd>
-          {technique === 'frames' && <><dt>{L.loaded}</dt><dd>{metrics ? `${metrics.loadedFrames ?? 0} / ${metrics.totalFrames ?? 0}` : nd}</dd><dt>{L.resident}</dt><dd>{metrics?.residentFrames ?? nd}</dd></>}
+          {technique === 'frames' && <><dt>{L.lagLoaded}</dt><dd>{metrics?.maxLagLoaded ?? nd}</dd><dt>{L.misses}</dt><dd>{metrics?.missesNotLoaded ?? nd}</dd><dt>{L.loaded}</dt><dd>{metrics ? `${metrics.loadedFrames ?? 0} / ${metrics.totalFrames ?? 0}` : nd}</dd><dt>{L.resident}</dt><dd>{metrics?.residentFrames ?? nd}</dd></>}
           <dt>{L.memory}</dt><dd>{info?.memoryMb ?? nd}</dd>
           <dt>{L.dpr} · {L.viewport}</dt><dd>{info ? `${info.dpr} · ${info.viewport}` : nd}</dd>
         </dl>
