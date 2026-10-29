@@ -80,6 +80,7 @@ export const SceneSection = forwardRef<HTMLElement, SceneSectionProps>(function 
       data-scene={scene.id}
       data-index={index}
       data-reduced={reduced}
+      data-light={scene.light ?? 'escura'}
       aria-label={label}
       style={{ ['--n' as string]: n }}
     >

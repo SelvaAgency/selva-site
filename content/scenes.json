@@ -1,36 +1,66 @@
 {
-  "_nota": "Textos copiados do Briefing Mestre v01. 'status' por bloco: aprovado (não alterar), conceito (aprovado em conceito, ajustes só com o Gui), proposta (não revisado). Cada item de 'blocks' aparece separado ao longo do scroll.",
+  "_nota": "Textos copiados do Briefing Mestre v01. 'status' por bloco: aprovado (não alterar), conceito (aprovado em conceito, ajustes só com o Gui), proposta (não revisado). Cada item de 'blocks' aparece separado ao longo do scroll. 'light' por cena: 'clara' (texto escuro sobre fundo claro) ou 'escura' (padrão).",
   "scenes": [
     {
       "id": "s0",
       "name": "Sobrevoo, descida e escolha",
-      "visual": "Vista aérea de floresta tropical; scroll desce a câmera até o solo, diante de vegetação densa. Não é vinheta automática.",
+      "visual": "Vista aérea em névoa densa, céu cinza-claro quase branco; scroll desce a câmera até o solo, diante de vegetação densa. Não é vinheta automática. Texto escuro com degradê sutil por trás para garantir contraste sobre fundo claro (direção visual de 29/10/2026).",
       "blocks": [
-        { "text": "O digital abriu infinitos caminhos.", "status": "aprovado" },
-        { "text": "Mas qual deles leva o seu negócio adiante?", "status": "conceito" }
+        {
+          "text": "O digital abriu infinitos caminhos.",
+          "status": "aprovado"
+        },
+        {
+          "text": "Mas qual deles leva o seu negócio adiante?",
+          "status": "conceito"
+        }
       ],
       "choices": {
         "status": "aprovado",
         "options": [
-          { "id": "rota-a", "label": "Descobrir oportunidades para meu negócio", "goTo": "s0b" },
-          { "id": "rota-b", "label": "Explorar a Selva", "goTo": "/projetos" }
+          {
+            "id": "rota-a",
+            "label": "Descobrir oportunidades para meu negócio",
+            "goTo": "s0b"
+          },
+          {
+            "id": "rota-b",
+            "label": "Explorar a Selva",
+            "goTo": "/projetos"
+          }
         ]
       },
-      "notes": "Timing de surgimento dos textos e botões a prototipar."
+      "notes": "Timing de surgimento dos textos e botões a prototipar.",
+      "light": "clara"
     },
     {
       "id": "s0b",
       "name": "Interesse e convite à jornada",
       "visual": "Câmera avança; pequena recompensa visual entre as duas decisões. Não empilhar duas perguntas sem movimento.",
       "blocks": [
-        { "type": "interest", "ref": "questions.json#interest", "status": "proposta" },
-        { "text": "Você já sabe o que procura. Mas será que conhece todas as possibilidades para o seu negócio?", "status": "proposta" }
+        {
+          "type": "interest",
+          "ref": "questions.json#interest",
+          "status": "proposta"
+        },
+        {
+          "text": "Você já sabe o que procura. Mas será que conhece todas as possibilidades para o seu negócio?",
+          "status": "proposta"
+        }
       ],
       "choices": {
         "status": "aprovado",
         "options": [
-          { "id": "descobrir", "label": "Quero descobrir", "goTo": "s1" },
-          { "id": "direto", "label": "Quero ir direto ao que procuro", "goTo": "/servicos/{interest.serviceSlug}" }
+          {
+            "id": "descobrir",
+            "label": "Quero descobrir",
+            "goTo": "s1"
+          },
+          {
+            "id": "direto",
+            "label": "Quero ir direto ao que procuro",
+            "goTo": "/servicos/{interest.serviceSlug}"
+          }
         ]
       }
     },
@@ -39,7 +69,10 @@
       "name": "Pergunta de abertura da caminhada",
       "visual": "Entrada no ambiente denso; movimento sutil, tempo para reflexão.",
       "blocks": [
-        { "text": "Sua presença digital está à altura do seu negócio?", "status": "aprovado" }
+        {
+          "text": "Sua presença digital está à altura do seu negócio?",
+          "status": "aprovado"
+        }
       ]
     },
     {
@@ -48,12 +81,34 @@
       "dimension": "infra",
       "visual": "Câmera percorre vegetação densa, encontra obstáculos; ao final, uma passagem se abre. Sem representação literal de problemas técnicos.",
       "blocks": [
-        { "text": "Toda presença digital depende de uma infraestrutura capaz de transformar os esforços de marketing em resultados concretos.", "status": "aprovado" },
-        { "text": "Um site lento, uma página que não aparece nos mecanismos de busca, um formulário com erro ou um processo de compra que não funciona podem comprometer a experiência do usuário e fazer com que oportunidades de negócio sejam perdidas.", "status": "aprovado" },
-        { "text": "Muitas vezes, são problemas relativamente simples de resolver, mas que passam despercebidos por falta de conhecimento ou monitoramento.", "status": "aprovado" },
-        { "text": "E, enquanto a empresa busca melhorar seus resultados investindo em comunicação e campanhas, o problema pode estar justamente na estrutura que sustenta essas ações.", "status": "aprovado" },
-        { "text": "Como está a infraestrutura digital da sua empresa?", "status": "aprovado" },
-        { "type": "questions", "ids": ["q1", "q2", "q3"] }
+        {
+          "text": "Toda presença digital depende de uma infraestrutura capaz de transformar os esforços de marketing em resultados concretos.",
+          "status": "aprovado"
+        },
+        {
+          "text": "Um site lento, uma página que não aparece nos mecanismos de busca, um formulário com erro ou um processo de compra que não funciona podem comprometer a experiência do usuário e fazer com que oportunidades de negócio sejam perdidas.",
+          "status": "aprovado"
+        },
+        {
+          "text": "Muitas vezes, são problemas relativamente simples de resolver, mas que passam despercebidos por falta de conhecimento ou monitoramento.",
+          "status": "aprovado"
+        },
+        {
+          "text": "E, enquanto a empresa busca melhorar seus resultados investindo em comunicação e campanhas, o problema pode estar justamente na estrutura que sustenta essas ações.",
+          "status": "aprovado"
+        },
+        {
+          "text": "Como está a infraestrutura digital da sua empresa?",
+          "status": "aprovado"
+        },
+        {
+          "type": "questions",
+          "ids": [
+            "q1",
+            "q2",
+            "q3"
+          ]
+        }
       ]
     },
     {
@@ -62,11 +117,30 @@
       "dimension": "marca",
       "visual": "Ambiente aberto, surpreendente, com luz e respiro. Recompensa visual independente do texto.",
       "blocks": [
-        { "text": "Quando os usuários chegam aos ambientes digitais de uma empresa, a experiência que encontram influencia diretamente a percepção que constroem sobre o negócio.", "status": "aprovado" },
-        { "text": "O posicionamento, a identidade visual, a comunicação e a navegação precisam transmitir credibilidade, apresentar com clareza os produtos e serviços e facilitar o relacionamento com o público.", "status": "aprovado" },
-        { "text": "Uma comunicação confusa, uma apresentação que não reflete a qualidade da empresa ou uma experiência de navegação pouco intuitiva podem afastar potenciais clientes, mesmo quando existe interesse no que ela oferece.", "status": "aprovado" },
-        { "text": "Seus ambientes digitais representam o valor do seu negócio e facilitam a jornada dos seus clientes?", "status": "aprovado" },
-        { "type": "questions", "ids": ["q4", "q5", "q6"] }
+        {
+          "text": "Quando os usuários chegam aos ambientes digitais de uma empresa, a experiência que encontram influencia diretamente a percepção que constroem sobre o negócio.",
+          "status": "aprovado"
+        },
+        {
+          "text": "O posicionamento, a identidade visual, a comunicação e a navegação precisam transmitir credibilidade, apresentar com clareza os produtos e serviços e facilitar o relacionamento com o público.",
+          "status": "aprovado"
+        },
+        {
+          "text": "Uma comunicação confusa, uma apresentação que não reflete a qualidade da empresa ou uma experiência de navegação pouco intuitiva podem afastar potenciais clientes, mesmo quando existe interesse no que ela oferece.",
+          "status": "aprovado"
+        },
+        {
+          "text": "Seus ambientes digitais representam o valor do seu negócio e facilitam a jornada dos seus clientes?",
+          "status": "aprovado"
+        },
+        {
+          "type": "questions",
+          "ids": [
+            "q4",
+            "q5",
+            "q6"
+          ]
+        }
       ]
     },
     {
@@ -75,12 +149,34 @@
       "dimension": "performance",
       "visual": "Câmera revela caminhos; um deles se abre até uma praia tropical. Visual comunica expansão.",
       "blocks": [
-        { "text": "Ter ambientes digitais funcionando corretamente e uma marca bem apresentada são condições fundamentais. Mas isso, por si só, não garante que novas oportunidades de negócio sejam geradas.", "status": "conceito" },
-        { "text": "É preciso desenvolver ações para alcançar potenciais clientes, despertar interesse, estimular decisões de compra e fortalecer o relacionamento com o público.", "status": "conceito" },
-        { "text": "Campanhas, mídia paga, conteúdo e automações são algumas das ferramentas que permitem explorar esse potencial.", "status": "conceito" },
-        { "text": "Para que essas iniciativas produzam resultados consistentes, é necessário trabalhar com objetivos claros, acompanhar indicadores e otimizar continuamente as estratégias e os investimentos.", "status": "conceito" },
-        { "text": "Sua empresa está aproveitando todo o potencial dos canais digitais para gerar negócios?", "status": "conceito" },
-        { "type": "questions", "ids": ["q7", "q8", "q9"] }
+        {
+          "text": "Ter ambientes digitais funcionando corretamente e uma marca bem apresentada são condições fundamentais. Mas isso, por si só, não garante que novas oportunidades de negócio sejam geradas.",
+          "status": "conceito"
+        },
+        {
+          "text": "É preciso desenvolver ações para alcançar potenciais clientes, despertar interesse, estimular decisões de compra e fortalecer o relacionamento com o público.",
+          "status": "conceito"
+        },
+        {
+          "text": "Campanhas, mídia paga, conteúdo e automações são algumas das ferramentas que permitem explorar esse potencial.",
+          "status": "conceito"
+        },
+        {
+          "text": "Para que essas iniciativas produzam resultados consistentes, é necessário trabalhar com objetivos claros, acompanhar indicadores e otimizar continuamente as estratégias e os investimentos.",
+          "status": "conceito"
+        },
+        {
+          "text": "Sua empresa está aproveitando todo o potencial dos canais digitais para gerar negócios?",
+          "status": "conceito"
+        },
+        {
+          "type": "questions",
+          "ids": [
+            "q7",
+            "q8",
+            "q9"
+          ]
+        }
       ]
     },
     {
@@ -88,10 +184,22 @@
       "name": "Operação integrada",
       "visual": "Na praia, câmera ganha altitude e revela a conexão visual entre os ambientes percorridos.",
       "blocks": [
-        { "text": "Os resultados de uma operação digital não dependem de uma única frente.", "status": "aprovado" },
-        { "text": "Uma campanha pode atrair potenciais clientes, mas perder oportunidades por falhas técnicas. Um site pode funcionar perfeitamente, mas não comunicar com clareza o valor da empresa. E uma boa experiência digital pode ter pouco impacto se não houver estratégias para atrair o público certo.", "status": "aprovado" },
-        { "text": "Por isso, infraestrutura, marca e performance precisam trabalhar de forma integrada, com objetivos compartilhados, planejamento e acompanhamento contínuo.", "status": "aprovado" },
-        { "text": "É essa visão integrada que orienta o trabalho da Selva.", "status": "aprovado" }
+        {
+          "text": "Os resultados de uma operação digital não dependem de uma única frente.",
+          "status": "aprovado"
+        },
+        {
+          "text": "Uma campanha pode atrair potenciais clientes, mas perder oportunidades por falhas técnicas. Um site pode funcionar perfeitamente, mas não comunicar com clareza o valor da empresa. E uma boa experiência digital pode ter pouco impacto se não houver estratégias para atrair o público certo.",
+          "status": "aprovado"
+        },
+        {
+          "text": "Por isso, infraestrutura, marca e performance precisam trabalhar de forma integrada, com objetivos compartilhados, planejamento e acompanhamento contínuo.",
+          "status": "aprovado"
+        },
+        {
+          "text": "É essa visão integrada que orienta o trabalho da Selva.",
+          "status": "aprovado"
+        }
       ]
     },
     {
@@ -99,10 +207,22 @@
       "name": "Diagnóstico preliminar",
       "visual": "Transição do cinematográfico para interface legível e informativa, dentro da identidade Selva.",
       "blocks": [
-        { "text": "Ao longo desta experiência, você avaliou três dimensões fundamentais da presença digital da sua empresa: infraestrutura, marca e experiência, e ativação e performance.", "status": "conceito" },
-        { "text": "Com base nas suas respostas, preparamos uma análise inicial para identificar os pontos de atenção e as possíveis oportunidades de evolução da sua operação digital.", "status": "conceito" },
-        { "text": "Veja o panorama da sua empresa.", "status": "conceito" },
-        { "type": "panorama", "ref": "scoring.json" }
+        {
+          "text": "Ao longo desta experiência, você avaliou três dimensões fundamentais da presença digital da sua empresa: infraestrutura, marca e experiência, e ativação e performance.",
+          "status": "conceito"
+        },
+        {
+          "text": "Com base nas suas respostas, preparamos uma análise inicial para identificar os pontos de atenção e as possíveis oportunidades de evolução da sua operação digital.",
+          "status": "conceito"
+        },
+        {
+          "text": "Veja o panorama da sua empresa.",
+          "status": "conceito"
+        },
+        {
+          "type": "panorama",
+          "ref": "scoring.json"
+        }
       ]
     },
     {
@@ -110,11 +230,26 @@
       "name": "Apresentação da Selva",
       "visual": "Identidade gráfica da Selva em protagonismo; visual editorial; cases reais do site atual.",
       "blocks": [
-        { "text": "O crescimento digital exige uma visão integrada.", "status": "conceito" },
-        { "text": "Na Selva, conectamos estratégia, marca, tecnologia e performance para construir operações digitais alinhadas aos objetivos de cada negócio.", "status": "conceito" },
-        { "text": "Da definição do posicionamento à criação dos ambientes digitais, do planejamento de comunicação à execução e otimização de campanhas, atuamos de forma integrada para transformar investimentos em marketing em resultados concretos.", "status": "conceito" },
-        { "text": "Conheça como podemos ajudar sua empresa a evoluir.", "status": "conceito" },
-        { "type": "cases", "source": "cases do site atual — não inventar métricas nem depoimentos" }
+        {
+          "text": "O crescimento digital exige uma visão integrada.",
+          "status": "conceito"
+        },
+        {
+          "text": "Na Selva, conectamos estratégia, marca, tecnologia e performance para construir operações digitais alinhadas aos objetivos de cada negócio.",
+          "status": "conceito"
+        },
+        {
+          "text": "Da definição do posicionamento à criação dos ambientes digitais, do planejamento de comunicação à execução e otimização de campanhas, atuamos de forma integrada para transformar investimentos em marketing em resultados concretos.",
+          "status": "conceito"
+        },
+        {
+          "text": "Conheça como podemos ajudar sua empresa a evoluir.",
+          "status": "conceito"
+        },
+        {
+          "type": "cases",
+          "source": "cases do site atual — não inventar métricas nem depoimentos"
+        }
       ]
     },
     {
@@ -122,14 +257,28 @@
       "name": "Próximo passo comercial",
       "visual": "Navegação clara e CTAs.",
       "blocks": [
-        { "text": "Agora que você identificou as principais oportunidades da sua presença digital, o próximo passo é entender como transformá-las em resultados concretos.", "status": "proposta" },
-        { "text": "A Selva pode ajudar sua empresa a construir esse caminho, com uma estratégia integrada às necessidades e aos objetivos do seu negócio.", "status": "proposta" }
+        {
+          "text": "Agora que você identificou as principais oportunidades da sua presença digital, o próximo passo é entender como transformá-las em resultados concretos.",
+          "status": "proposta"
+        },
+        {
+          "text": "A Selva pode ajudar sua empresa a construir esse caminho, com uma estratégia integrada às necessidades e aos objetivos do seu negócio.",
+          "status": "proposta"
+        }
       ],
       "choices": {
         "status": "proposta",
         "options": [
-          { "id": "conversar", "label": "Conversar com a Selva", "goTo": "contato" },
-          { "id": "projetos", "label": "Conhecer nossos projetos", "goTo": "/projetos" }
+          {
+            "id": "conversar",
+            "label": "Conversar com a Selva",
+            "goTo": "contato"
+          },
+          {
+            "id": "projetos",
+            "label": "Conhecer nossos projetos",
+            "goTo": "/projetos"
+          }
         ]
       },
       "notes": "Captura de contato e envio ao CRM só com consentimento. Fluxo de e-mail pendente."

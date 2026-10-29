@@ -13,10 +13,14 @@ export type SceneBlock = TextBlock | InterestBlock | QuestionsBlock | PanoramaBl
 export type Choice = { id: string; label: string; goTo: string };
 export type Choices = { status: ApprovalStatus; options: Choice[] };
 
+export type SceneLight = 'clara' | 'escura';
+
 export type Scene = {
   id: string;
   name: string;
   dimension?: Dimension;
+  /** luz da cena: define cor do texto, scrim e HUD. Padrão: escura */
+  light?: SceneLight;
   visual: string;
   blocks: SceneBlock[];
   choices?: Choices;
