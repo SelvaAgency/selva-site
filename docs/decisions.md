@@ -12,6 +12,8 @@
 - Luz varia por posição de scroll, não por cena: na cena 0 o texto fica na névoa clara e as escolhas no solo escuro; troca no meio da descida.
 - Preview por branch na Vercel (passo a passo em `docs/deploy.md`).
 - Peso por cena no mobile: meta de 8 MB, mas o limite só será fixado depois de medir a cena 0 real (dois trechos, 20 s) nas duas técnicas.
+- Assets pesados não entram no git, nem em branch temporária. Testes no iPhone pela porta pública do Codespace; a Vercel fica para o deploy de código. Produção: mídia em armazenamento externo (R2 ou Vercel Blob) — proposta na Fase 4, ver `docs/fase3-relatorio.md`.
+- Solução final: HEVC com fallback H.264 por navegador.
 - Fase 3 sem clipe sintético: T1 (720p) e T2 (1080p), originais do Magnific a 30 fps, em `assets-src/`. A emenda não é final; servem para medir o scroll.
 - Tokens visuais extraídos do site atual aprovados como estão (`docs/tokens.md`), incluindo aliases semânticos e a camada de overlay escuro sobre as cenas.
 - Pular perguntas: botão explícito "Pular" em cada pergunta, além de poder simplesmente rolar adiante. Pergunta pulada = `optionId: null`.

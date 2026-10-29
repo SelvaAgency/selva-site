@@ -15,14 +15,14 @@ Saída em `public/scenes/cena0/`:
 - `frames/{desktop,mobile}/NNNN.webp` (desktop 1280 de largura, mobile 540 com recorte 9:16)
 - `poster-*.jpg` e `manifest.json` com os bytes de cada variante (é o peso real medido)
 
-Os assets gerados entram no git **só nas branches de teste da Fase 3**. Na Fase 4 vão para CDN/Blob.
+Os assets gerados **não entram no git** (`public/scenes/` está no `.gitignore`). Cada ambiente que for testar roda o script localmente; em produção (Fase 4) ficam em armazenamento de mídia externo.
 
 ## 2. Rodar o laboratório
 `/lab/cena0` (não indexada). Seletor de técnica, variante (desktop 16:9 ou mobile 9:16) e codec. O painel mede:
 fps durante o scroll, atraso máximo entre quadro pedido e exibido, quadros apresentados e descartados, tempo até o primeiro quadro, bytes baixados, tempo médio de seek/decodificação, bitmaps residentes (frames), memória JS (só Chrome).
 
 ## 3. Teste no iPhone (Gui)
-1. Abra a URL de preview da branch na Vercel (ou o link público do Codespace) e vá em `/lab/cena0`.
+1. Abra o link público do Codespace (porta 3100) e vá em `/lab/cena0`.
 2. Para cada combinação abaixo: role até o fim da cena e volte, 3 vezes, no ritmo normal; toque em **Copiar relatório** e cole na conversa.
    - vídeo · mobile · h264-gop6
    - vídeo · mobile · hevc-gop6

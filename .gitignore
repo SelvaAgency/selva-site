@@ -44,3 +44,6 @@ next-env.d.ts
 # brutos de vídeo (não versionar)
 assets-src/*
 !assets-src/README.md
+
+# assets gerados (vídeo/frames): fora do git em qualquer branch; produção usa armazenamento de mídia
+public/scenes/

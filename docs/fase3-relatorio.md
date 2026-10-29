@@ -33,8 +33,35 @@ O que a emulação mostrou:
 - Frames: a primeira versão do adaptador acumulava bitmaps (190–225 residentes) e empilhava decodificações (730–2.900 ms). Com fila por proximidade, 3 decodificações simultâneas e descarte fora da janela, ficou em 25 residentes e ~22 ms por quadro.
 - O "atraso máximo" registrado (235–266 quadros) vem do salto final do script de teste, de 0 para o meio da cena; não é representativo. No iPhone, com scroll real, o painel mede o atraso verdadeiro.
 
-## 3. iPhone 15 Pro, Safari (Gui)
+## 3. Projeção da jornada completa (10 trechos de 10 s = 100 s, 3.000 quadros)
+
+Base: peso medido da cena 0 (2 trechos) dividido por 2. T1 foi ampliado de 720p para 1080p, então o trecho real em 1080p tende a pesar um pouco mais que esta média.
+
+| Técnica | Por trecho · desktop | Jornada · desktop | Por trecho · mobile | Jornada · mobile |
+|---|---|---|---|---|
+| HEVC, keyframe a cada 6 | 10,9 MB | **109 MB** | 4,4 MB | **44 MB** |
+| H.264, keyframe a cada 6 | 15,4 MB | 154 MB | 5,8 MB | 58 MB |
+| Frames WebP (referência) | 20,5 MB | 205 MB | 11,9 MB | 119 MB |
+
+Ninguém baixa a jornada inteira de uma vez: o carregamento é progressivo, cena atual e a próxima (CLAUDE.md). O que o visitante sente é o peso do **primeiro trecho** e o de cada trecho seguinte, baixado enquanto ele lê a cena anterior. Por isso a meta é por trecho, com um teto para a soma.
+
+**Meta proposta**
+- Mobile: ≤ 5 MB por trecho, ≤ 50 MB na jornada completa; primeiro trecho ≤ 4 MB.
+- Desktop: ≤ 12 MB por trecho, ≤ 120 MB na jornada completa.
+- Caminhos para fechar na meta, a confirmar no iPhone: HEVC com CRF 28 em vez de 26; keyframe a cada 10 quadros em vez de 6, se o seek no Safari continuar sem atraso; largura mobile de 540 px em vez de 608. Juntos, costumam render 25–35 %.
+- Fallback H.264 fica ~35 % acima da meta; aceitável no desktop (Windows sem HEVC) e raro no mobile, onde iPhone usa HEVC e Android pode usar VP9 (12,8 MB nos 20 s medidos, com margem para cair).
+
+## 4. iPhone 15 Pro, Safari (Gui)
 [colar aqui os relatórios copiados em /lab/cena0, uma combinação por bloco]
 
-## 4. Recomendação
-[após as medições no iPhone]
+## 5. Recomendação (parcial; fecha com as medições do iPhone)
+
+**Técnica:** vídeo com scrub, não sequência de frames. Os frames custam 2,7× mais rede no mobile e ocupam a thread principal com decodificação; o vídeo usa o decodificador de hardware e cabe na meta. A sequência de frames fica como plano B apenas se o Safari mostrar seek irregular no HEVC com GOP curto, o que o laboratório vai responder.
+
+**Codecs:** HEVC (`hvc1`) como principal, com fallback H.264 por navegador. Implementação: `<video>` com dois `<source>`, HEVC primeiro e H.264 depois; o navegador escolhe o primeiro que decodifica (Safari iOS/macOS e Chrome com decodificação de hardware pegam HEVC; Windows sem codec, Firefox e Android antigos caem no H.264). O `manifest.json` já carrega as duas variantes; o adaptador passa a montar os `<source>` em vez de um `src` único. Opcional: VP9 para Chrome/Android, se os números do Android pedirem.
+
+**Keyframes:** GOP curto é o que faz o scrub responder (o Safari busca a partir do keyframe anterior). Começar com 6 quadros; subir para 10 se o iPhone mostrar atraso zero, porque reduz o peso.
+
+**Carregamento:** cena atual e a próxima, `preload="auto"` só nelas; pôster JPEG como primeiro pixel; `prefers-reduced-motion` mostra o pôster.
+
+**Armazenamento (Fase 4):** assets fora do git, em armazenamento de mídia com CDN. Opções: Cloudflare R2 (sem custo de saída de dados, API S3, domínio próprio tipo `media.selva.agency`, cache na borda) ou Vercel Blob (integração mais simples com o projeto, saída de dados cobrada). Recomendo R2 pelo custo de egress em vídeo; Vercel Blob se a prioridade for um fornecedor só. Em código: `NEXT_PUBLIC_MEDIA_BASE` prefixando os caminhos do manifest; `scripts/prepare-scene.mjs` ganha um passo de upload. Decisão registrada em `docs/decisions.md`.
