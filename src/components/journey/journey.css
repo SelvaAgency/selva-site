@@ -191,3 +191,43 @@
 .scene:has(.block[data-kind='panorama'][data-state='active']) .scene-asset__visual,
 .scene:has(.block[data-kind='cases'][data-state='active']) .scene-asset__label,
 .scene:has(.block[data-kind='cases'][data-state='active']) .scene-asset__visual { opacity: 0; }
+
+/* ===== Cena clara (névoa, céu quase branco): texto escuro + scrim sutil ===== */
+.scene[data-light='clara'] { color: var(--selva-ink); }
+.scene-asset[data-light='clara'] {
+  background: #e9e9e4;
+  color: var(--selva-ink-a35);
+}
+.scene-asset[data-light='clara']::after {
+  /* névoa adensando perto do solo: branco-creme, não ink */
+  background: linear-gradient(to top, rgba(246,245,230,.9), rgba(246,245,230,.35) 50%, transparent);
+  opacity: calc(.5 + .5 * var(--p, 0));
+}
+.scene-asset[data-light='clara'] .scene-asset__layer--far {
+  background: radial-gradient(120% 80% at 50% 15%, #fbfbf7, #d9dad4 75%);
+}
+.scene-asset[data-light='clara'] .scene-asset__layer--near {
+  background: radial-gradient(60% 50% at 30% 95%, #c9cbc3, transparent 70%),
+              radial-gradient(50% 40% at 80% 85%, #d2d3cc, transparent 70%);
+}
+.scene-asset[data-light='clara'] .scene-asset__grid {
+  background-image: linear-gradient(rgba(11,11,12,.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(11,11,12,.05) 1px, transparent 1px);
+}
+/* scrim: degradê sutil atrás do bloco de texto, garante contraste sobre qualquer detalhe da névoa */
+.scene[data-light='clara'] .scene__content::before {
+  content: '';
+  position: absolute; inset: auto 0 0 0; height: 70%;
+  background: linear-gradient(to top, rgba(246,245,230,.92), rgba(246,245,230,.6) 45%, transparent);
+  pointer-events: none;
+}
+.scene[data-light='clara'] .scene__content > .block { position: relative; }
+.scene[data-light='clara'] .btn:hover { background: var(--selva-ink); color: var(--selva-paper); }
+.scene[data-light='clara'] .option { background: rgba(246,245,230,.6); border-color: var(--selva-ink-a35); }
+.scene[data-light='clara'] .option[aria-pressed='true'] { background: var(--selva-ink); color: var(--selva-paper); border-color: var(--selva-ink); }
+.scene[data-light='clara'] ::selection { background: var(--selva-orange); color: var(--selva-ink); }
+
+/* HUD acompanha a luz da cena atual (a barra inferior já usa difference) */
+.journey[data-light='clara'] .hud--top { color: var(--selva-ink); }
+.journey[data-light='clara'] .hud--top .btn:hover { background: var(--selva-ink); color: var(--selva-paper); }
+.journey .hud--top { transition: color var(--dur-slow); }

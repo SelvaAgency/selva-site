@@ -7,6 +7,8 @@
 - Página de serviço (atalho "Quero ir direto ao que procuro"): página "dura", simples, mostrando o serviço selecionado, com explicação, cases e contato.
 
 ## Decididas (29/10/2026)
+- Direção visual: cena 0 em névoa densa com céu quase branco; texto escuro com degradê sutil por trás. Specs de vídeo em `docs/assets-spec.md` (16:9, 1080p, 24 fps, 10 s, sem áudio, recorte central vertical no mobile).
+- Fase 3 exige teste em iPhone real com Safari, não só emulação.
 - Tokens visuais extraídos do site atual aprovados como estão (`docs/tokens.md`), incluindo aliases semânticos e a camada de overlay escuro sobre as cenas.
 - Pular perguntas: botão explícito "Pular" em cada pergunta, além de poder simplesmente rolar adiante. Pergunta pulada = `optionId: null`.
 - Ordem das branches da Fase 2: setup → conteúdo → estado → cenas → panorama → rotas duras.

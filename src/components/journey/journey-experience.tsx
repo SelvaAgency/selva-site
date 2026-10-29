@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useSyncExternalStore } from 'r
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
-import { sceneIndex, sceneList } from '@/content';
+import { sceneById, sceneIndex, sceneList } from '@/content';
 import { track } from '@/lib/events';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useJourney } from '@/state/journey';
@@ -52,6 +52,7 @@ export function JourneyExperience({ panoramaSlot, casesSlot }: JourneyExperience
   const currentScene = useJourney((s) => s.currentScene);
   const hydrated = useSyncExternalStore(subscribeNoop, () => true, () => false);
   const currentIndex = Math.max(0, sceneIndex(currentScene));
+  const currentLight = sceneById.get(currentScene)?.light ?? 'escura';
 
   useEffect(() => {
     track({ type: 'enter' });
@@ -143,7 +144,7 @@ export function JourneyExperience({ panoramaSlot, casesSlot }: JourneyExperience
   const scenes = useMemo(() => sceneList, []);
 
   return (
-    <div className="journey" data-reduced={reduced}>
+    <div className="journey" data-reduced={reduced} data-light={currentLight}>
       <JourneyHud onRestart={onRestart} onTop={() => scrollToScene('s0')} />
       <main id="conteudo">
         {scenes.map((scene, i) => (
