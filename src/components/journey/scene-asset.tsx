@@ -34,10 +34,11 @@ function PlaceholderAsset({ scene, shouldLoad, progressRef }: Omit<SceneAssetPro
   }, [ref]);
   const label = ui.placeholders.scene.replace('{name}', `${sceneNumber(scene.id)} · ${scene.name}`);
   return (
-    <div ref={ref} className="scene-asset scene-asset--placeholder" data-loaded={shouldLoad} data-light={scene.light ?? 'escura'} aria-hidden="true">
+    <div ref={ref} className="scene-asset scene-asset--placeholder" data-loaded={shouldLoad} aria-hidden="true">
       <div className="scene-asset__layer scene-asset__layer--far" />
       <div className="scene-asset__layer scene-asset__layer--near" />
       <div className="scene-asset__grid" />
+      <div className="scene-asset__fog" />
       <p className="scene-asset__label t-label">{label}</p>
       <p className="scene-asset__visual t-label">{scene.visual}</p>
     </div>

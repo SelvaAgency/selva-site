@@ -3,7 +3,8 @@ import { useCallback, useEffect, useMemo, useRef, useSyncExternalStore } from 'r
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
-import { sceneById, sceneIndex, sceneList } from '@/content';
+import { sceneIndex, sceneList } from '@/content';
+import { activeUnit, lightAt } from '@/lib/scene-light';
 import { track } from '@/lib/events';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useJourney } from '@/state/journey';
@@ -15,17 +16,15 @@ gsap.registerPlugin(ScrollTrigger);
 
 const subscribeNoop = () => () => {};
 
-/** Lead-in antes do primeiro bloco: a cena respira antes do texto. */
-const LEAD_IN = 0.08;
-
-function activeUnit(progress: number, n: number): number {
-  if (n <= 0) return -1;
-  if (progress < LEAD_IN) return -1;
-  const p = (progress - LEAD_IN) / (1 - LEAD_IN);
-  return Math.min(n - 1, Math.floor(p * n));
+function setLight(section: HTMLElement, light: string, isCurrent: boolean) {
+  if (section.dataset.light !== light) section.dataset.light = light;
+  if (!isCurrent) return;
+  const root = section.closest<HTMLElement>('.journey');
+  if (root && root.dataset.light !== light) root.dataset.light = light;
 }
 
-function applyProgress(section: HTMLElement, progress: number) {
+function applyProgress(section: HTMLElement, progress: number, index: number, isCurrent: boolean) {
+  setLight(section, lightAt(sceneList[index], progress), isCurrent);
   const asset = section.querySelector<HTMLElement>('.scene-asset');
   if (asset) asset.style.setProperty('--p', progress.toFixed(4));
   const blocks = section.querySelectorAll<HTMLElement>('.block');
@@ -52,7 +51,6 @@ export function JourneyExperience({ panoramaSlot, casesSlot }: JourneyExperience
   const currentScene = useJourney((s) => s.currentScene);
   const hydrated = useSyncExternalStore(subscribeNoop, () => true, () => false);
   const currentIndex = Math.max(0, sceneIndex(currentScene));
-  const currentLight = sceneById.get(currentScene)?.light ?? 'escura';
 
   useEffect(() => {
     track({ type: 'enter' });
@@ -82,12 +80,12 @@ export function JourneyExperience({ panoramaSlot, casesSlot }: JourneyExperience
     const triggers = sections.current.map((el, i) => {
       if (!el) return null;
       const id = sceneList[i].id;
-      applyProgress(el, 0);
+      applyProgress(el, 0, i, i === 0);
       return ScrollTrigger.create({
         trigger: el,
         start: 'top top',
         end: 'bottom bottom',
-        onUpdate: (self) => applyProgress(el, self.progress),
+        onUpdate: (self) => applyProgress(el, self.progress, i, self.isActive),
         onEnter: () => setScene(id),
         onEnterBack: () => setScene(id),
       });
@@ -113,7 +111,14 @@ export function JourneyExperience({ panoramaSlot, casesSlot }: JourneyExperience
     if (!reduced || !hydrated) return;
     const blocks = document.querySelectorAll<HTMLElement>('.scene .block');
     const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.setAttribute('data-state', 'active'); }),
+      (entries) =>
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          const b = e.target as HTMLElement;
+          b.dataset.state = 'active';
+          const section = b.closest<HTMLElement>('.scene');
+          if (section && b.dataset.light) setLight(section, b.dataset.light, true);
+        }),
       { threshold: 0.2 },
     );
     blocks.forEach((b) => io.observe(b));
@@ -144,7 +149,7 @@ export function JourneyExperience({ panoramaSlot, casesSlot }: JourneyExperience
   const scenes = useMemo(() => sceneList, []);
 
   return (
-    <div className="journey" data-reduced={reduced} data-light={currentLight}>
+    <div className="journey" data-reduced={reduced} data-light="escura">
       <JourneyHud onRestart={onRestart} onTop={() => scrollToScene('s0')} />
       <main id="conteudo">
         {scenes.map((scene, i) => (

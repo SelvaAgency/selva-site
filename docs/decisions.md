@@ -7,8 +7,12 @@
 - Página de serviço (atalho "Quero ir direto ao que procuro"): página "dura", simples, mostrando o serviço selecionado, com explicação, cases e contato.
 
 ## Decididas (29/10/2026)
-- Direção visual: cena 0 em névoa densa com céu quase branco; texto escuro com degradê sutil por trás. Specs de vídeo em `docs/assets-spec.md` (16:9, 1080p, 24 fps, 10 s, sem áudio, recorte central vertical no mobile).
-- Fase 3 exige teste em iPhone real com Safari, não só emulação.
+- Direção visual: cena 0 em névoa densa com céu quase branco; texto escuro com degradê sutil por trás. Specs de vídeo em `docs/assets-spec.md` (16:9, 1080p, 30 fps, 10 s, sem áudio, recorte central vertical no mobile).
+- Fase 3 exige teste em iPhone real com Safari, não só emulação. Aparelho de referência: iPhone 15 Pro.
+- Luz varia por posição de scroll, não por cena: na cena 0 o texto fica na névoa clara e as escolhas no solo escuro; troca no meio da descida.
+- Preview por branch na Vercel (passo a passo em `docs/deploy.md`).
+- Peso por cena no mobile: meta de 8 MB, mas o limite só será fixado depois de medir a cena 0 real (dois trechos, 20 s) nas duas técnicas.
+- Fase 3 sem clipe sintético: usar o trecho real T1 (720p, 30 fps, 10 s) em `assets-src/`.
 - Tokens visuais extraídos do site atual aprovados como estão (`docs/tokens.md`), incluindo aliases semânticos e a camada de overlay escuro sobre as cenas.
 - Pular perguntas: botão explícito "Pular" em cada pergunta, além de poder simplesmente rolar adiante. Pergunta pulada = `optionId: null`.
 - Ordem das branches da Fase 2: setup → conteúdo → estado → cenas → panorama → rotas duras.
