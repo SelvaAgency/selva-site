@@ -58,9 +58,11 @@ function applyProgress(section: HTMLElement, progress: number, index: number, is
 export type JourneyExperienceProps = {
   panoramaSlot?: React.ReactNode;
   casesSlot?: React.ReactNode;
+  /** vizinhos de cada lado mantidos no palco (padrão 1 = anterior, atual, seguinte) */
+  stageWindow?: number;
 };
 
-export function JourneyExperience({ panoramaSlot, casesSlot }: JourneyExperienceProps) {
+export function JourneyExperience({ panoramaSlot, casesSlot, stageWindow = 1 }: JourneyExperienceProps) {
   const reduced = useReducedMotion();
   const sections = useRef<(HTMLElement | null)[]>([]);
   const lenisRef = useRef<Lenis | null>(null);
@@ -168,7 +170,7 @@ export function JourneyExperience({ panoramaSlot, casesSlot }: JourneyExperience
 
   return (
     <div className="journey" data-reduced={reduced} data-light="escura">
-      {hydrated && !reduced && <VideoStage />}
+      {hydrated && !reduced && <VideoStage window={stageWindow} />}
       <JourneyHud onRestart={onRestart} onTop={() => scrollToScene('s0')} />
       <main id="conteudo">
         {scenes.map((scene, i) => (

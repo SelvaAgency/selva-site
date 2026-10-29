@@ -269,3 +269,16 @@
     pointer-events: none;
   }
 }
+
+/* Perguntas com fundo próprio (content: questionsBackdrop: 'painel'): quadro claro atrás */
+.scene[data-qbg='painel'] .block[data-kind='question'] .question {
+  background: rgba(11,11,12,.78);
+  border-radius: var(--radius-l);
+  padding: var(--card-pad-s);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.scene[data-qbg='painel'] .block[data-kind='question'] .option { background: rgba(11,11,12,.5); }
+@media (max-width: 760px) {
+  .scene[data-qbg='painel'] .block[data-kind='question'] .question { background: rgba(11,11,12,.86); padding: var(--space-6); }
+}

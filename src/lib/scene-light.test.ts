@@ -29,6 +29,12 @@ describe('luz por posição de scroll', () => {
     expect(assetProgress(s0b, 0.9)).toBe(1);
     expect(assetProgress(s0, 0.9)).toBe(0.9);
   });
+  it('cena 2: vídeo termina exatamente onde a pergunta 1 começa', () => {
+    const s2 = scenes.scenes[3];
+    expect(s2.asset?.span).toBeCloseTo(unitStart(5, 8), 2);
+    expect(activeUnit(s2.asset!.span!, 8)).toBe(5);
+    expect(assetProgress(s2, s2.asset!.span! - 0.01)).toBeLessThan(1);
+  });
   it('activeUnit e unitStart são consistentes', () => {
     for (let u = 0; u < 3; u++) expect(activeUnit(unitStart(u, 3) + 0.001, 3)).toBe(u);
     expect(activeUnit(0.01, 3)).toBe(-1);

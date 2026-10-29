@@ -106,6 +106,16 @@
     "reducedNotice": "Movimento reduzido ativo: a cena mostra só o pôster.",
     "unknown": "n/d",
     "collapse": "Recolher",
-    "expand": "Medições"
+    "expand": "Medições",
+    "stage": "Palco (jornada real)",
+    "stageHint": "Jornada real com o palco fixo. Role da cena 0 até a 2 e volte; o painel mostra quais trechos estão montados e a memória.",
+    "stageWindow": "Janela (vizinhos por lado)",
+    "stageMetrics": {
+      "current": "cena atual",
+      "mounted": "trechos montados",
+      "clips": "trechos",
+      "heap": "heap JS agora / máx. (MB)",
+      "note": "Safari não expõe memória JS; use o Web Inspector ou a reação do aparelho."
+    }
   }
 }

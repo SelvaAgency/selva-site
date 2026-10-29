@@ -51,6 +51,19 @@ Ninguém baixa a jornada inteira de uma vez: o carregamento é progressivo, cena
 - Caminhos para fechar na meta, a confirmar no iPhone: HEVC com CRF 28 em vez de 26; keyframe a cada 10 quadros em vez de 6, se o seek no Safari continuar sem atraso; largura mobile de 540 px em vez de 608. Juntos, costumam render 25–35 %.
 - Fallback H.264 fica ~35 % acima da meta; aceitável no desktop (Windows sem HEVC) e raro no mobile, onde iPhone usa HEVC e Android pode usar VP9 (12,8 MB nos 20 s medidos, com margem para cair).
 
+## 3b. Palco único com janela deslizante (29/10/2026)
+
+Arquitetura adotada na branch `preview/cena0-real`: um palco de vídeo fixo no fundo; o scroll da jornada controla uma linha do tempo contínua; cada cena com asset toca o seu trecho e segura o último quadro sob os textos e perguntas. Na fronteira, o último quadro de um trecho é o primeiro do seguinte, e a troca é só visibilidade.
+
+Janela: só o trecho atual, o anterior (pré-posicionado no último quadro) e o seguinte (no primeiro) ficam montados; o que sai é desmontado e a mídia liberada (`load()` sem fontes). Verificado por instrumentação em Chromium emulando iPhone, com 4 trechos (cenas 0, 0B, 1 e 2): a janela desliza corretamente nos dois sentidos e os vizinhos chegam já no quadro certo.
+
+| Medição (Chromium headless, 4 trechos, 24 MB no total) | Janela 1 (3 montados) | Todos montados |
+|---|---|---|
+| Heap JS máximo | 7 MB | 7 MB |
+| RSS máximo de todos os processos do navegador | 866 MB | 872 MB |
+
+Leitura: com só 4 trechos pequenos, a diferença fica dentro do ruído (o RSS base do Chromium headless é ~800 MB). A janela importa no iOS, onde o Safari limita decodificadores de vídeo simultâneos e descarta mídia sob pressão de memória; com 10 trechos de 1080p, manter todos montados é o cenário que costuma falhar. O painel do laboratório (`/lab/cena0?tecnica=palco&janela=1`) mostra quais trechos estão montados; no iPhone, a medição de memória vem do Web Inspector (Safari no Mac com o aparelho no cabo) ou do comportamento do aparelho.
+
 ## 4. iPhone 15 Pro, Safari (Gui)
 [colar aqui os relatórios copiados em /lab/cena0, uma combinação por bloco]
 

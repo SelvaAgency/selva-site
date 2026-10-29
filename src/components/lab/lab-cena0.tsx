@@ -12,13 +12,15 @@ import type { AssetMetrics } from '@/components/journey/assets/metrics';
 import { loadManifest, pickVariant, type SceneManifest, type Variant } from '@/components/journey/assets/scene-manifest';
 import { emitSceneProgress } from '@/components/journey/assets/use-scene-progress';
 import { TextBlock } from '@/components/journey/blocks';
+import { JourneyExperience } from '@/components/journey/journey-experience';
+import { StagePanel } from './stage-panel';
 import { isTextBlock } from '@/content/types';
 import '@/components/journey/journey.css';
 import './lab.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-type Technique = 'video' | 'frames';
+type Technique = 'video' | 'frames' | 'palco';
 const subscribeNoop = () => () => {};
 const SCENE = 'cena0';
 const subscribeViewport = (cb: () => void) => {
@@ -36,6 +38,7 @@ export function LabCena0() {
   const hydrated = useSyncExternalStore(subscribeNoop, () => true, () => false);
   const [manifest, setManifest] = useState<SceneManifest | null | undefined>(undefined);
   const [technique, setTechnique] = useState<Technique>('video');
+  const [stageWindow, setStageWindow] = useState(1);
   const autoVariant = useSyncExternalStore(subscribeViewport, pickVariant, () => 'desktop' as Variant);
   const [variantOverride, setVariant] = useState<Variant | null>(null);
   const variant: Variant = variantOverride ?? autoVariant;
@@ -50,6 +53,15 @@ export function LabCena0() {
   const [resetKey, setResetKey] = useState(0);
 
   useEffect(() => { if (hydrated) void loadManifest(SCENE).then(setManifest); }, [hydrated]);
+  useEffect(() => {
+    if (!hydrated) return;
+    const q = new URLSearchParams(window.location.search);
+    const t = q.get('tecnica');
+    const j = Number(q.get('janela'));
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- parâmetros de URL lidos uma vez, após hidratar
+    if (t === 'video' || t === 'frames' || t === 'palco') setTechnique(t);
+    if (Number.isFinite(j) && j >= 0) setStageWindow(j);
+  }, [hydrated]);
 
   const video = useMemo(() => manifest?.videos.find((v) => v.id === videoId && v.variant === variant) ?? null, [manifest, videoId, variant]);
   const frames = useMemo(() => manifest?.frames.find((f) => f.variant === variant) ?? null, [manifest, variant]);
@@ -75,7 +87,7 @@ export function LabCena0() {
 
   // mesmo motor da jornada: Lenis + ScrollTrigger com scrub na seção
   useEffect(() => {
-    if (!hydrated || reduced || !manifest) return;
+    if (!hydrated || reduced || !manifest || technique === 'palco') return;
     const el = section.current; if (!el) return;
     const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
     lenis.on('scroll', ScrollTrigger.update);
@@ -136,8 +148,16 @@ export function LabCena0() {
             <select value={technique} onChange={(e) => setTechnique(e.target.value as Technique)}>
               <option value="video">{ui.lab.video}</option>
               <option value="frames">{ui.lab.frames}</option>
+              <option value="palco">{ui.lab.stage}</option>
             </select>
           </label>
+          {technique === 'palco' && (
+            <label className="t-label">{ui.lab.stageWindow}
+              <select value={stageWindow} onChange={(e) => setStageWindow(Number(e.target.value))}>
+                {[0, 1, 2, 9].map((n) => <option key={n} value={n}>{n === 9 ? 'todos' : n}</option>)}
+              </select>
+            </label>
+          )}
           <label className="t-label">{ui.lab.variant}
             <select value={variant} onChange={(e) => setVariant(e.target.value as Variant)}>
               <option value="desktop">desktop 16:9</option>
@@ -154,10 +174,11 @@ export function LabCena0() {
         </div>
       </header>
 
-      {manifest === null && <p className="placeholder lab__missing">{ui.lab.missing}</p>}
+      {technique === 'palco' && <JourneyExperience key={stageWindow} stageWindow={stageWindow} />}
+      {technique !== 'palco' && manifest === null && <p className="placeholder lab__missing">{ui.lab.missing}</p>}
       {reduced && <p className="t-label lab__missing">{ui.lab.reducedNotice}</p>}
 
-      {manifest && (
+      {technique !== 'palco' && manifest && (
         <section ref={section} className="scene" data-reduced={reduced} data-light="clara" style={{ ['--n' as string]: UNITS }} key={`${technique}-${variant}-${videoId}-${resetKey}`}>
           <div className="scene__pin">
             {reduced ? (
@@ -181,6 +202,9 @@ export function LabCena0() {
         </section>
       )}
 
+      {technique === 'palco' ? (
+        <StagePanel />
+      ) : (
       <aside className="lab__panel" data-open={open} aria-live="polite">
         <div className="lab__head">
           <span className="lab__mini">{L.fps} {fps || nd} · {L.lag} {metrics?.maxLag ?? nd}</span>
@@ -205,6 +229,7 @@ export function LabCena0() {
           <button type="button" className="btn btn--small" onClick={reset}>{ui.lab.reset}</button>
         </div>
       </aside>
+      )}
     </div>
   );
 }

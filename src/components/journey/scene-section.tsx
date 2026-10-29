@@ -83,6 +83,7 @@ export const SceneSection = forwardRef<HTMLElement, SceneSectionProps>(function 
       data-reduced={reduced}
       data-light={lightAt(scene, 0)}
       data-scrim={scene.scrim}
+      data-qbg={scene.questionsBackdrop}
       aria-label={label}
       style={{ ['--n' as string]: n }}
     >

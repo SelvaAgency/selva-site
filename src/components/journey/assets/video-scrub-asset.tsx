@@ -20,6 +20,8 @@ export type VideoScrubAssetProps = {
   /** no palco: id da cena (o motor encontra o clipe por [data-clip]) e visibilidade inicial */
   clipId?: string;
   active?: boolean;
+  /** posição inicial (0–1) assim que os metadados chegam: vizinho anterior = 1, seguinte = 0 */
+  initialProgress?: number;
 };
 
 /** MIME com codecs, para o navegador descartar fontes sem decodificador antes de baixar */
@@ -35,7 +37,7 @@ export function mimeFor(v: VideoEntry): string {
  * Técnica A: <video> mudo com playsinline; o scroll define currentTime.
  * Só um seek em voo por vez: o último alvo pedido é aplicado quando o anterior termina.
  */
-export function VideoScrubAsset({ video, sources, poster, shouldLoad, onMetrics, clipId, active }: VideoScrubAssetProps) {
+export function VideoScrubAsset({ video, sources, poster, shouldLoad, onMetrics, clipId, active, initialProgress }: VideoScrubAssetProps) {
   const root = useRef<HTMLDivElement | null>(null);
   const el = useRef<VideoEl | null>(null);
   const m = useRef<AssetMetrics>(newMetrics('video', video.id + '-' + video.variant, video.bytes));
@@ -87,8 +89,20 @@ export function VideoScrubAsset({ video, sources, poster, shouldLoad, onMetrics,
       if (m.current.firstFrameMs === null) m.current.firstFrameMs = performance.now() - mountedAt.current;
       report();
     };
+    const onMeta = () => {
+      if (m.current.updates > 0 || seeking.current) return;
+      // pré-posiciona: vizinho no quadro da fronteira; clipe corrente montado no meio da cena vai para o progresso atual
+      let p = initialProgress;
+      if (p == null && clipId) {
+        const overlay = document.querySelector<HTMLElement>(`#${clipId} .scene-overlay, #${clipId} .scene-asset`);
+        const cur = overlay ? parseFloat(overlay.style.getPropertyValue('--p')) : NaN;
+        if (Number.isFinite(cur)) p = cur;
+      }
+      if (p != null) applySeek(p * v.duration);
+    };
     v.addEventListener('seeked', onSeeked);
     v.addEventListener('loadeddata', onLoaded);
+    v.addEventListener('loadedmetadata', onMeta);
     let rvfc = 0;
     const tick = (_now: number, meta: { presentedFrames: number; mediaTime: number }) => {
       m.current.presented = meta.presentedFrames;
@@ -99,9 +113,21 @@ export function VideoScrubAsset({ video, sources, poster, shouldLoad, onMetrics,
     return () => {
       v.removeEventListener('seeked', onSeeked);
       v.removeEventListener('loadeddata', onLoaded);
+      v.removeEventListener('loadedmetadata', onMeta);
       if (rvfc && 'cancelVideoFrameCallback' in v) (v as unknown as { cancelVideoFrameCallback: (h: number) => void }).cancelVideoFrameCallback(rvfc);
     };
-  }, [video, sources, applySeek, report]);
+  }, [video, sources, applySeek, report, initialProgress, clipId]);
+
+  // só na desmontagem real (o clipe saiu da janela do palco): solta a mídia para o navegador liberar o decodificador
+  useEffect(() => {
+    const v = el.current;
+    return () => {
+      if (!v) return;
+      v.removeAttribute('src');
+      while (v.firstChild) v.removeChild(v.firstChild);
+      v.load();
+    };
+  }, []);
 
   useEffect(() => {
     if (shouldLoad && el.current && el.current.preload !== 'auto') { el.current.preload = 'auto'; el.current.load(); }

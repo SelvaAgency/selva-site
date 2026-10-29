@@ -30,6 +30,8 @@ export type Scene = {
   leadIn?: number;
   /** 'forte' reforça o degradê atrás do texto no mobile (quando a área calma do quadro some no recorte vertical) */
   scrim?: 'forte';
+  /** 'painel' dá às perguntas um fundo próprio escuro (quando o quadro atrás é claro) */
+  questionsBackdrop?: 'painel';
   visual: string;
   blocks: SceneBlock[];
   choices?: Choices;

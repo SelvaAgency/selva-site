@@ -1,5 +1,5 @@
 {
-  "_nota": "Textos copiados do Briefing Mestre v01. 'status' por bloco: aprovado (não alterar), conceito (aprovado em conceito, ajustes só com o Gui), proposta (não revisado). Cada item de 'blocks' aparece separado ao longo do scroll. 'light': luz da cena — string ('clara' | 'escura') ou transição por posição de scroll {from, to, switchAt (0–1)}. A luz define cor do texto, scrim e HUD; muda no meio da cena, não só entre cenas. 'asset': {kind: 'video', id} liga a cena aos assets gerados em public/scenes/<id> (manifest.json); sem 'asset', placeholder. 'leadIn': fração da cena antes do primeiro bloco (padrão 0.08). 'asset.span': fração da cena em que o vídeo roda inteiro (depois segura o último quadro). 'scrim': 'forte' reforça o degradê atrás do texto no mobile.",
+  "_nota": "Textos copiados do Briefing Mestre v01. 'status' por bloco: aprovado (não alterar), conceito (aprovado em conceito, ajustes só com o Gui), proposta (não revisado). Cada item de 'blocks' aparece separado ao longo do scroll. 'light': luz da cena — string ('clara' | 'escura') ou transição por posição de scroll {from, to, switchAt (0–1)}. A luz define cor do texto, scrim e HUD; muda no meio da cena, não só entre cenas. 'asset': {kind: 'video', id} liga a cena aos assets gerados em public/scenes/<id> (manifest.json); sem 'asset', placeholder. 'leadIn': fração da cena antes do primeiro bloco (padrão 0.08). 'asset.span': fração da cena em que o vídeo roda inteiro (depois segura o último quadro). 'scrim': 'forte' reforça o degradê atrás do texto no mobile. 'questionsBackdrop': 'painel' dá às perguntas um fundo próprio escuro (quadro claro atrás).",
   "scenes": [
     {
       "id": "s0",
@@ -100,7 +100,7 @@
       "id": "s2",
       "name": "Infraestrutura digital",
       "dimension": "infra",
-      "visual": "Câmera percorre vegetação densa, encontra obstáculos; ao final, uma passagem se abre. Sem representação literal de problemas técnicos.",
+      "visual": "Câmera percorre vegetação densa, encontra obstáculos; ao final, uma passagem iluminada se abre (T05, K04→K06). Nesta versão de teste um único trecho cobre a cena inteira (na oficial serão dois): o vídeo se distribui ao longo dos cinco blocos de texto e segura o último quadro, a passagem iluminada, sob as perguntas 1 a 3. O centro do quadro final é claro: perguntas sobre fundo próprio, principalmente no mobile. Sem representação literal de problemas técnicos.",
       "blocks": [
         {
           "text": "Toda presença digital depende de uma infraestrutura capaz de transformar os esforços de marketing em resultados concretos.",
@@ -130,7 +130,13 @@
             "q3"
           ]
         }
-      ]
+      ],
+      "asset": {
+        "kind": "video",
+        "id": "cena2",
+        "span": 0.655
+      },
+      "questionsBackdrop": "painel"
     },
     {
       "id": "s3",
