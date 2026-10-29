@@ -1,5 +1,5 @@
 {
-  "_nota": "Textos copiados do Briefing Mestre v01. 'status' por bloco: aprovado (não alterar), conceito (aprovado em conceito, ajustes só com o Gui), proposta (não revisado). Cada item de 'blocks' aparece separado ao longo do scroll. 'light': luz da cena — string ('clara' | 'escura') ou transição por posição de scroll {from, to, switchAt (0–1)}. A luz define cor do texto, scrim e HUD; muda no meio da cena, não só entre cenas.",
+  "_nota": "Textos copiados do Briefing Mestre v01. 'status' por bloco: aprovado (não alterar), conceito (aprovado em conceito, ajustes só com o Gui), proposta (não revisado). Cada item de 'blocks' aparece separado ao longo do scroll. 'light': luz da cena — string ('clara' | 'escura') ou transição por posição de scroll {from, to, switchAt (0–1)}. A luz define cor do texto, scrim e HUD; muda no meio da cena, não só entre cenas. 'asset': {kind: 'video', id} liga a cena aos assets gerados em public/scenes/<id> (manifest.json); sem 'asset', placeholder.",
   "scenes": [
     {
       "id": "s0",
@@ -35,6 +35,10 @@
         "from": "clara",
         "to": "escura",
         "switchAt": 0.65
+      },
+      "asset": {
+        "kind": "video",
+        "id": "cena0"
       }
     },
     {

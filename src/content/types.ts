@@ -23,6 +23,8 @@ export type Scene = {
   dimension?: Dimension;
   /** luz: define cor do texto, scrim e HUD; pode mudar no meio da cena. Padrão: escura */
   light?: SceneLightSpec;
+  /** asset real da cena (manifest em public/scenes/<id>); sem isso, placeholder */
+  asset?: { kind: 'video' | 'frames'; id: string };
   visual: string;
   blocks: SceneBlock[];
   choices?: Choices;

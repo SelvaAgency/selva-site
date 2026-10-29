@@ -2,6 +2,7 @@
 import { useEffect, useRef } from 'react';
 import { sceneNumber, ui } from '@/content';
 import type { Scene } from '@/content/types';
+import { VideoSceneAsset } from './assets/video-scene-asset';
 
 /**
  * API de asset de cena. O mesmo contrato serve para placeholder, sequência de frames e vídeo:
@@ -18,12 +19,12 @@ export type SceneAssetProps = {
   progressRef?: React.RefObject<HTMLDivElement | null>;
 };
 
-export function SceneAsset({ scene, kind = 'placeholder', shouldLoad, progressRef }: SceneAssetProps) {
-  if (kind !== 'placeholder') {
-    // frames/vídeo chegam na Fase 3/4 com o mesmo contrato
-    return <PlaceholderAsset scene={scene} shouldLoad={shouldLoad} progressRef={progressRef} />;
-  }
-  return <PlaceholderAsset scene={scene} shouldLoad={shouldLoad} progressRef={progressRef} />;
+export function SceneAsset({ scene, kind, shouldLoad, progressRef }: SceneAssetProps) {
+  const k = kind ?? scene.asset?.kind ?? 'placeholder';
+  const placeholder = <PlaceholderAsset scene={scene} shouldLoad={shouldLoad} progressRef={progressRef} />;
+  if (k === 'video') return <VideoSceneAsset scene={scene} shouldLoad={shouldLoad} fallback={placeholder} />;
+  // frames na jornada principal: só se o teste no iPhone apontar para eles (Fase 3)
+  return placeholder;
 }
 
 function PlaceholderAsset({ scene, shouldLoad, progressRef }: Omit<SceneAssetProps, 'kind' | 'index'>) {

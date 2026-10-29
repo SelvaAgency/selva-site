@@ -10,17 +10,29 @@ type VideoEl = HTMLVideoElement & {
 };
 
 export type VideoScrubAssetProps = {
+  /** entrada principal (duração, fps e bytes para as métricas) */
   video: VideoEntry;
+  /** fontes alternativas em ordem de preferência; o navegador toca a primeira que decodifica */
+  sources?: VideoEntry[];
   poster?: string;
   shouldLoad: boolean;
   onMetrics?: (m: AssetMetrics) => void;
 };
 
+/** MIME com codecs, para o navegador descartar fontes sem decodificador antes de baixar */
+export function mimeFor(v: VideoEntry): string {
+  if (v.codec === 'hevc') return 'video/mp4; codecs="hvc1.1.6.L120.B0"';
+  if (v.codec === 'h264') return 'video/mp4; codecs="avc1.640028"';
+  if (v.codec === 'vp9') return 'video/webm; codecs="vp9"';
+  if (v.codec === 'av1') return 'video/mp4; codecs="av01.0.08M.08"';
+  return v.path.endsWith('.webm') ? 'video/webm' : 'video/mp4';
+}
+
 /**
  * Técnica A: <video> mudo com playsinline; o scroll define currentTime.
  * Só um seek em voo por vez: o último alvo pedido é aplicado quando o anterior termina.
  */
-export function VideoScrubAsset({ video, poster, shouldLoad, onMetrics }: VideoScrubAssetProps) {
+export function VideoScrubAsset({ video, sources, poster, shouldLoad, onMetrics }: VideoScrubAssetProps) {
   const root = useRef<HTMLDivElement | null>(null);
   const el = useRef<VideoEl | null>(null);
   const m = useRef<AssetMetrics>(newMetrics('video', video.id + '-' + video.variant, video.bytes));
@@ -65,7 +77,10 @@ export function VideoScrubAsset({ video, poster, shouldLoad, onMetrics }: VideoS
       report();
     };
     const onLoaded = () => {
-      m.current.bytesLoaded = video.bytes; // o navegador não expõe bytes por mídia; usamos o manifest
+      // qual fonte o navegador escolheu (HEVC, H.264 ou VP9)
+      const chosen = (sources ?? [video]).find((x) => v.currentSrc.endsWith(x.path));
+      if (chosen) { m.current.variantId = chosen.id + '-' + chosen.variant; m.current.bytesTotal = chosen.bytes; }
+      m.current.bytesLoaded = (chosen ?? video).bytes; // o navegador não expõe bytes por mídia; usamos o manifest
       if (m.current.firstFrameMs === null) m.current.firstFrameMs = performance.now() - mountedAt.current;
       report();
     };
@@ -83,7 +98,7 @@ export function VideoScrubAsset({ video, poster, shouldLoad, onMetrics }: VideoS
       v.removeEventListener('loadeddata', onLoaded);
       if (rvfc && 'cancelVideoFrameCallback' in v) (v as unknown as { cancelVideoFrameCallback: (h: number) => void }).cancelVideoFrameCallback(rvfc);
     };
-  }, [video, applySeek, report]);
+  }, [video, sources, applySeek, report]);
 
   useEffect(() => {
     if (shouldLoad && el.current && el.current.preload !== 'auto') { el.current.preload = 'auto'; el.current.load(); }
@@ -94,14 +109,16 @@ export function VideoScrubAsset({ video, poster, shouldLoad, onMetrics }: VideoS
       <video
         ref={el}
         className="scene-asset__media"
-        src={shouldLoad ? video.path : undefined}
+        src={!sources && shouldLoad ? video.path : undefined}
         poster={poster}
         muted
         playsInline
         preload={shouldLoad ? 'auto' : 'none'}
         disablePictureInPicture
         disableRemotePlayback
-      />
+      >
+        {sources && shouldLoad && sources.map((x) => <source key={x.id} src={x.path} type={mimeFor(x)} />)}
+      </video>
     </div>
   );
 }
