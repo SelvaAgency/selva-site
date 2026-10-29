@@ -104,6 +104,8 @@
     "reset": "Zerar medições",
     "scrollHint": "Role até o fim da cena e volte, 3 vezes, no ritmo normal.",
     "reducedNotice": "Movimento reduzido ativo: a cena mostra só o pôster.",
-    "unknown": "n/d"
+    "unknown": "n/d",
+    "collapse": "Recolher",
+    "expand": "Medições"
   }
 }

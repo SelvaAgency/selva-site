@@ -13,3 +13,7 @@
 .lab__actions { display: flex; gap: var(--space-3); margin-top: var(--space-5); flex-wrap: wrap; }
 .lab .scene__content { padding-bottom: 240px; }
 @media (max-width: 760px) { .lab__panel { font-size: 11px; padding: var(--space-4); } .lab .scene__content { padding-bottom: 300px; } }
+.lab__head { display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); }
+.lab__mini { font-variant-numeric: tabular-nums; }
+.lab__panel[data-open='false'] .lab__hint, .lab__panel[data-open='false'] .lab__dl, .lab__panel[data-open='false'] .lab__actions { display: none; }
+.lab__panel[data-open='true'] .lab__head { margin-bottom: var(--space-4); }

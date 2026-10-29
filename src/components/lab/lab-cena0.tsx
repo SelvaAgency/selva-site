@@ -43,6 +43,7 @@ export function LabCena0() {
   const [metrics, setMetrics] = useState<AssetMetrics | null>(null);
   const [fps, setFps] = useState(0);
   const [copied, setCopied] = useState(false);
+  const [open, setOpen] = useState(false);
   const section = useRef<HTMLElement | null>(null);
   const fpsSamples = useRef<number[]>([]);
   const lastMetrics = useRef<AssetMetrics | null>(null);
@@ -180,7 +181,11 @@ export function LabCena0() {
         </section>
       )}
 
-      <aside className="lab__panel" aria-live="polite">
+      <aside className="lab__panel" data-open={open} aria-live="polite">
+        <div className="lab__head">
+          <span className="lab__mini">{L.fps} {fps || nd} · {L.lag} {metrics?.maxLag ?? nd}</span>
+          <button type="button" className="btn btn--small" onClick={() => setOpen((o) => !o)} aria-expanded={open}>{open ? ui.lab.collapse : ui.lab.expand}</button>
+        </div>
         <p className="t-label lab__hint">{ui.lab.scrollHint}</p>
         <dl className="lab__dl">
           <dt>{L.fps}</dt><dd>{fps || nd}</dd>
