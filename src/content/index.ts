@@ -7,14 +7,17 @@ import questionsJson from '@content/questions.json';
 import scoringJson from '@content/scoring.json';
 import servicesJson from '@content/services.json';
 import uiJson from '@content/ui.json';
+import casesJson from '@content/cases.json';
 import { validateContent } from './validate';
-import type { Dimension, Question, QuestionsFile, Scene, ScenesFile, ScoringFile, Service, ServicesFile } from './types';
+import type { CaseItem, CasesFile, Dimension, Question, QuestionsFile, Scene, ScenesFile, ScoringFile, Service, ServicesFile } from './types';
 
 export const scenes = scenesJson as ScenesFile;
 export const questions = questionsJson as QuestionsFile;
 export const scoring = scoringJson as ScoringFile;
 export const services = servicesJson as ServicesFile;
 export const ui = uiJson;
+export const cases = casesJson as CasesFile;
+export const caseBySlug = (slug: string): CaseItem | undefined => cases.cases.find((c) => c.slug === slug);
 
 const errors = validateContent({ scenes, questions, scoring, services });
 if (errors.length) {

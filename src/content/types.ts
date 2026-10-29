@@ -99,3 +99,20 @@ export function isPanoramaBlock(b: SceneBlock): b is PanoramaBlock {
 export function isCasesBlock(b: SceneBlock): b is CasesBlock {
   return 'type' in b && b.type === 'cases';
 }
+
+export type CaseImage = { src: string; alt: string };
+export type CaseItem = {
+  slug: string;
+  name: string;
+  kind: string;
+  tags: string[];
+  bg: string;
+  fg: string;
+  cover: string;
+  hero: string;
+  coverPosition: string;
+  gallery: CaseImage[];
+  summary: string;
+  results: string;
+};
+export type CasesFile = { _nota?: string; status: string; imagesDir: string; cases: CaseItem[] };
