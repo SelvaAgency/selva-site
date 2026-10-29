@@ -1,0 +1,194 @@
+/*
+ * SELVA — Design tokens (Fase 1)
+ * Extraídos do site atual (legacy/index.html, selva.up.railway.app).
+ * Fonte de cada valor documentada em docs/tokens.md.
+ * Seção "SEMÂNTICOS" é proposta para o site novo — aguardando aprovação.
+ */
+
+:root {
+  /* ============ CORES — marca (site atual) ============ */
+  --selva-ink:        #0B0B0C; /* fundo escuro, texto sobre claro */
+  --selva-paper:      #F6F5E6; /* creme: texto sobre escuro, fundo de seções claras */
+  --selva-orange:     #ED6E1A; /* acento principal: logo, hover, CTA, seleção de texto */
+  --selva-orange-deep:#B9500F; /* lateral da "moeda" 3D (sombra do laranja) */
+  --selva-blue:       #4165F4; /* manifesto, clientes, hover do botão magnético */
+  --selva-navy:       #00206B; /* painel de serviços A */
+  --selva-navy-light: #0E2F8F; /* face do prisma A */
+  --selva-pink:       #F7B2D9; /* texto/borda do painel A */
+  --selva-grey:       #C9C9C9; /* painel de serviços B */
+  --selva-red:        #D9432B; /* palco do carrossel de cases */
+
+  /* Alphas recorrentes */
+  --selva-paper-a80: rgba(246,245,230,.8);
+  --selva-paper-a75: rgba(246,245,230,.75);
+  --selva-paper-a70: rgba(246,245,230,.7);
+  --selva-paper-a60: rgba(246,245,230,.6);
+  --selva-paper-a40: rgba(246,245,230,.4);
+  --selva-ink-a35:   rgba(11,11,12,.35);
+  --selva-ink-a12:   rgba(11,11,12,.12);
+  --selva-shadow-a35: rgba(0,0,0,.35);
+  --selva-shadow-a40: rgba(0,0,0,.4);
+
+  /* ============ TIPOGRAFIA ============ */
+  --font-sans: 'Archivo', Arial, sans-serif;           /* variável: wdth 62–125, wght 100–900 */
+  --font-mono: 'Space Mono', ui-monospace, monospace;  /* 400 / 700 */
+
+  /* Display (manchetes) — Archivo 900, expandido */
+  --display-weight: 900;
+  --display-stretch: 125%;
+  --display-tracking: -0.025em;   /* varia de -.02em a -.05em conforme o tamanho */
+  --display-tracking-tight: -0.04em;
+  --display-leading: 0.86;        /* .8 (gigante) a .92 (pequeno) */
+
+  /* Escala de display (clamp do site atual) */
+  --text-display-xl: clamp(80px, 17vw, 300px);   /* nome do case, wordmark no rodapé */
+  --text-display-l:  clamp(60px, 12vw, 200px);   /* CTA final */
+  --text-display-m:  clamp(48px, 8.5vw, 140px);  /* título de painel de serviço */
+  --text-display-s:  clamp(40px, 7vw, 120px);    /* depoimentos, clientes */
+  --text-hero:       clamp(34px, 5.2vw, 82px);   /* manchete do hero */
+  --text-kinetic:    clamp(54px, 12.5vw, 210px); /* texto cinético (manifesto) */
+
+  /* Lead / manifesto — Archivo 700 */
+  --text-lead:          clamp(26px, 3.2vw, 50px);
+  --lead-weight:        700;
+  --lead-leading:       1.08;
+  --lead-tracking:      -0.02em;
+
+  /* Corpo — Archivo 500 */
+  --text-body-l: clamp(18px, 1.6vw, 24px);
+  --text-body-m: clamp(16px, 1.3vw, 20px);
+  --text-body-s: clamp(15px, 1.2vw, 18px);
+  --text-body-xs: clamp(13px, 1.05vw, 15px);
+  --body-weight:  500;
+  --body-leading: 1.4;        /* 1.35 no body-l */
+  --measure:      46ch;       /* 40–46ch nos parágrafos */
+
+  /* Rótulos mono */
+  --text-label: 12px;
+  --label-tracking: 0.08em;   /* .06em nos chips de depoimento */
+  --label-leading: 1.5;
+  --label-transform: uppercase;
+  --text-ui: 13px;            /* créditos, percentual de scroll */
+  --text-ui-xs: 11px;         /* rótulo do cursor */
+
+  /* Botões */
+  --text-button: 14px;
+  --button-weight: 800;
+  --text-logo: 19px;
+
+  /* ============ ESPAÇAMENTO E GRID ============ */
+  --gutter: clamp(16px, 3vw, 40px);      /* margem lateral universal */
+  --nav-offset: 92px;                    /* topo do conteúdo abaixo da nav fixa */
+  --nav-pad-y: 18px;
+  --edge-bottom: 24px;                   /* créditos/rodapé de cena */
+  --hero-text-bottom: 64px;              /* 70px no mobile */
+
+  --space-1: 2px;
+  --space-2: 6px;
+  --space-3: 8px;
+  --space-4: 10px;
+  --space-5: 12px;
+  --space-6: 16px;
+  --space-7: 20px;
+  --space-8: 24px;
+  --space-9: 40px;
+
+  --section-pad-top:    clamp(70px, 8vw, 120px);
+  --section-pad-bottom: clamp(60px, 6vw, 90px);     /* até clamp(110px,10vw,160px) */
+  --section-gap:        clamp(40px, 5vw, 80px);
+  --block-gap:          clamp(24px, 4vw, 60px);
+  --grid-gap:           clamp(12px, 2vw, 24px);
+  --card-pad:           clamp(24px, 3vw, 40px);
+  --card-pad-s:         clamp(16px, 2vw, 28px);
+
+  /* Grid: full-bleed, flex-wrap com bases fixas; sem max-width de container */
+  --col-basis-text: 520px;   /* parágrafo do manifesto */
+  --col-basis-panel: 420px;  /* texto do painel de serviço */
+  --col-basis-aside: 340px;
+  --breakpoint-mobile: 760px;
+
+  /* Tamanhos de componentes */
+  --hit-min: 44px;           /* altura mínima de botão (48px no pill-btn) */
+  --hit-circle: 52px;        /* botão circular de fechar */
+  --card-aspect: 4 / 5;      /* card de case no carrossel */
+  --card-w: clamp(150px, 16vw, 250px);
+  --prism-w: clamp(200px, 24vw, 340px);
+  --prism-h: clamp(250px, 30vw, 420px);
+  --coin-w: clamp(220px, 24vw, 340px);
+  --coin-aspect: 340 / 100;
+
+  /* ============ RAIOS ============ */
+  --radius-xs: 2px;
+  --radius-m: 12px;          /* imagens, cards de case */
+  --radius-l: 16px;          /* hero de case, faces do prisma */
+  --radius-xl: 18px;         /* card de depoimento */
+  --radius-section: clamp(28px, 4vw, 56px); /* topo arredondado de painel empilhado */
+  --radius-pill: 999px;
+  --radius-circle: 50%;
+
+  /* ============ BORDAS, FOCO, SOMBRAS ============ */
+  --border-thin: 1.5px;      /* tags, chips */
+  --border: 2px;             /* botões, prisma, réguas */
+  --focus-ring: 3px solid currentColor;
+  --focus-offset: 4px;
+  --rule: 2px;               /* barra de progresso, sublinhado de nav */
+
+  --shadow-panel: 0 -30px 60px var(--selva-shadow-a35);  /* painel empilhado por cima */
+  --shadow-card:  0 30px 60px var(--selva-shadow-a40);   /* card de depoimento */
+  --shadow-sticker: drop-shadow(0 6px 0 var(--selva-ink-a12)); /* offset duro, sem blur */
+
+  /* ============ MOTION ============ */
+  --ease-out:    cubic-bezier(.2, .8, .2, 1);   /* padrão: hovers, reveals, entradas */
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);  /* intro/eclipse */
+  --ease-in-out-strong: cubic-bezier(.76, 0, .24, 1);
+  --ease-wipe:   cubic-bezier(.7, 0, .2, 1);    /* saída da intro (clip-path) */
+  --ease-in:     cubic-bezier(.7, 0, .8, .4);
+
+  --dur-fast:   .25s;   /* opacidade de palavras */
+  --dur-base:   .3s;    /* hover de botão, cursor */
+  --dur-ui:     .35s;   /* sublinhado, barra */
+  --dur-med:    .4s;    /* logo hover, fase */
+  --dur-slow:   .6s;    /* troca de cor do modal */
+  --dur-wipe:   .8s;    /* saída da intro */
+  --dur-reveal: .9s;    /* entrada de caracteres/blocos */
+  --dur-line:   1.1s;   /* reveal de linha de manchete */
+  --dur-fade:   1.2s;   /* fade-in do canvas */
+  --dur-cover:  1.4s;   /* zoom-out de capa */
+
+  --stagger-line: .08s;  /* entre linhas de manchete */
+  --stagger-char: .045s; /* entre caracteres */
+  --delay-block: .5s;
+
+  --loop-pulse: 1.6s;    /* ponto do CTA */
+  --loop-drip:  1.8s;    /* indicador de scroll */
+  --loop-spin:  22s;     /* globo (28s no adesivo) */
+
+  /* Scroll: valores do motor JS */
+  --scroll-lerp: .15;         /* suavização da velocidade */
+  --pointer-lerp: .06;        /* suavização do mouse */
+  --pin-hero: 3;              /* altura de pin em múltiplos de 100vh */
+  --pin-cases: 6.5;
+  --pin-services-a: 3.4;
+  --pin-services-b: 2.4;
+  --dpr-max: 2;
+}
+
+/* ============ SEMÂNTICOS (PROPOSTA para o site novo — aguardando aprovação) ============ */
+:root {
+  --color-bg:        var(--selva-ink);
+  --color-fg:        var(--selva-paper);
+  --color-fg-muted:  var(--selva-paper-a70);
+  --color-fg-faint:  var(--selva-paper-a40);
+  --color-accent:    var(--selva-orange);
+  --color-accent-fg: var(--selva-ink);
+  --color-selection: var(--selva-orange);
+  --color-surface-editorial: var(--selva-paper); /* cenas 6–8 e páginas de serviço */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0s; --dur-base: 0s; --dur-ui: 0s; --dur-med: 0s; --dur-slow: 0s;
+    --dur-wipe: 0s; --dur-reveal: 0s; --dur-line: 0s; --dur-fade: 0s; --dur-cover: 0s;
+    --stagger-line: 0s; --stagger-char: 0s; --delay-block: 0s;
+  }
+}

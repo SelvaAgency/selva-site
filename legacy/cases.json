@@ -1,0 +1,194 @@
+{
+  "_nota": "Manifesto dos cases do site atual (legacy/index.html). Nomes, tags, cores e imagens são dados reais do site publicado. Os textos descritivos do site atual NÃO foram copiados (regra: não reaproveitar texto). Métricas e depoimentos: nenhum — não inventar.",
+  "imagesDir": "legacy/cases/",
+  "cases": [
+    {
+      "name": "Baesh",
+      "kind": "Branding · Papelaria · Site",
+      "tags": [
+        "Identidade",
+        "Papelaria",
+        "Site"
+      ],
+      "bg": "#D9432B",
+      "fg": "#F6F5E6",
+      "cover": "eb7795243d8416d7313d6f0a1b3e8672.jpg",
+      "hero": "ce93d7a8eea4c0836dbd774375ab996d.jpg",
+      "coverPosition": "50% 50%",
+      "gallery": [
+        {
+          "file": "eb7795243d8416d7313d6f0a1b3e8672.jpg",
+          "alt": "Papelaria da Baesh"
+        },
+        {
+          "file": "fa2ab5862d3deaf9c57eb153cf448491.jpg",
+          "alt": "Cartaz: o fim da receita é só o começo da conversa"
+        },
+        {
+          "file": "ec3a46808e7a5ec50fdda70fd3e430d0.jpg",
+          "alt": "Panelas e pratos servidos à mesa"
+        }
+      ]
+    },
+    {
+      "name": "Scaffold Play",
+      "kind": "Identidade · Sistema · App",
+      "tags": [
+        "Identidade",
+        "Sistema gráfico",
+        "App"
+      ],
+      "bg": "#141414",
+      "fg": "#F6F5E6",
+      "cover": "5d26a2997aa8022edb5779f42cf87c36.jpg",
+      "hero": "d5d30b13b0872faf52a9ff82cabd38dd.jpg",
+      "coverPosition": "50% 50%",
+      "gallery": [
+        {
+          "file": "5d26a2997aa8022edb5779f42cf87c36.jpg",
+          "alt": "Cartões da Scaffold Play com blocos pixelados"
+        },
+        {
+          "file": "0c789faaee0eed9f3d7607488a362471.jpg",
+          "alt": "Pôster com os pilares da Play"
+        }
+      ]
+    },
+    {
+      "name": "Ligvegan",
+      "kind": "Branding · Mascote · OOH",
+      "tags": [
+        "Branding",
+        "Mascote",
+        "OOH",
+        "Merch"
+      ],
+      "bg": "#9BF2B9",
+      "fg": "#0F3B22",
+      "cover": "7c2e4a87f8e8b9e1540be371f41ebd49.jpg",
+      "hero": "83eb9d73fb2c702ab4dc3e44ed0d534e.jpg",
+      "coverPosition": "50% 40%",
+      "gallery": [
+        {
+          "file": "7c2e4a87f8e8b9e1540be371f41ebd49.jpg",
+          "alt": "Ecobag Ligvegan: baita sabor, zero treta"
+        },
+        {
+          "file": "7c9d0ec9ee41983582a9fad69003b48f.jpg",
+          "alt": "Cartaz Ligvegan na parede de tijolos"
+        }
+      ]
+    },
+    {
+      "name": "Arka",
+      "kind": "Identidade · Marketplace",
+      "tags": [
+        "Wordmark",
+        "Ilustração",
+        "E-commerce"
+      ],
+      "bg": "#1E9BE0",
+      "fg": "#FBF7EA",
+      "cover": "c6ac8a171f219969374d32f4bb971ea1.jpg",
+      "hero": "c6ac8a171f219969374d32f4bb971ea1.jpg",
+      "coverPosition": "50% 50%",
+      "gallery": []
+    },
+    {
+      "name": "Nikaya",
+      "kind": "Identidade visual",
+      "tags": [
+        "Wordmark",
+        "Key visual"
+      ],
+      "bg": "#2A0D3E",
+      "fg": "#EBDCFF",
+      "cover": "326386423ddd84beb69f31765dd5584f.jpg",
+      "hero": "262a47083fcf1e423f1fd7d4ee494965.jpg",
+      "coverPosition": "50% 50%",
+      "gallery": [
+        {
+          "file": "326386423ddd84beb69f31765dd5584f.jpg",
+          "alt": "Logo Nikaya sob um feixe de luz"
+        }
+      ]
+    },
+    {
+      "name": "Surf Junkie Club",
+      "kind": "Ilustração · Lançamento",
+      "tags": [
+        "Ilustração",
+        "Lançamento",
+        "Social"
+      ],
+      "bg": "#EE3FA8",
+      "fg": "#121212",
+      "cover": "4f972ca381240aeba7ee77c2b0765b9c.jpg",
+      "hero": "4f972ca381240aeba7ee77c2b0765b9c.jpg",
+      "coverPosition": "30% 50%",
+      "gallery": []
+    },
+    {
+      "name": "Over Coffee",
+      "kind": "Identidade · Key visual",
+      "tags": [
+        "Padronagem",
+        "OOH"
+      ],
+      "bg": "#ECE5CB",
+      "fg": "#1F4A33",
+      "cover": "8f01fca77a9ef832af5b96afc45a1f55.jpg",
+      "hero": "8f01fca77a9ef832af5b96afc45a1f55.jpg",
+      "coverPosition": "50% 50%",
+      "gallery": []
+    },
+    {
+      "name": "Imagine",
+      "kind": "Campanha · Key visual",
+      "tags": [
+        "Campanha",
+        "OOH",
+        "Foto"
+      ],
+      "bg": "#B5562F",
+      "fg": "#FFF4EA",
+      "cover": "a211a6c65fc4b9379b71570230e8ef43.jpg",
+      "hero": "18fd18ecd997076b938c223acbabef7a.jpg",
+      "coverPosition": "50% 50%",
+      "gallery": [
+        {
+          "file": "a211a6c65fc4b9379b71570230e8ef43.jpg",
+          "alt": "Tenista em quadra de saibro: imagine a precisão"
+        }
+      ]
+    },
+    {
+      "name": "Inverness",
+      "kind": "Direção de arte",
+      "tags": [
+        "Direção de arte",
+        "Padronagem"
+      ],
+      "bg": "#0E6B3F",
+      "fg": "#F6F5E6",
+      "cover": "e0a7decedd9b2c9c667f4978d59e738e.jpg",
+      "hero": "e0a7decedd9b2c9c667f4978d59e738e.jpg",
+      "coverPosition": "50% 50%",
+      "gallery": []
+    },
+    {
+      "name": "VCF",
+      "kind": "Identidade · Adesivos",
+      "tags": [
+        "Identidade",
+        "Adesivos"
+      ],
+      "bg": "#16213F",
+      "fg": "#EEF5B0",
+      "cover": "f95221499097ce668a53714afa238e37.jpg",
+      "hero": "f95221499097ce668a53714afa238e37.jpg",
+      "coverPosition": "45% 50%",
+      "gallery": []
+    }
+  ]
+}
