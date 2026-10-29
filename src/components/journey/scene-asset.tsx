@@ -12,22 +12,21 @@ export type SceneAssetKind = 'placeholder' | 'frames' | 'video';
 
 export type SceneAssetProps = {
   scene: Scene;
-  index: number;
   kind?: SceneAssetKind;
   shouldLoad: boolean;
   /** ref para o motor escrever `--p` (progresso) sem passar pelo React */
   progressRef?: React.RefObject<HTMLDivElement | null>;
 };
 
-export function SceneAsset({ scene, index, kind = 'placeholder', shouldLoad, progressRef }: SceneAssetProps) {
+export function SceneAsset({ scene, kind = 'placeholder', shouldLoad, progressRef }: SceneAssetProps) {
   if (kind !== 'placeholder') {
     // frames/vídeo chegam na Fase 3/4 com o mesmo contrato
-    return <PlaceholderAsset scene={scene} index={index} shouldLoad={shouldLoad} progressRef={progressRef} />;
+    return <PlaceholderAsset scene={scene} shouldLoad={shouldLoad} progressRef={progressRef} />;
   }
-  return <PlaceholderAsset scene={scene} index={index} shouldLoad={shouldLoad} progressRef={progressRef} />;
+  return <PlaceholderAsset scene={scene} shouldLoad={shouldLoad} progressRef={progressRef} />;
 }
 
-function PlaceholderAsset({ scene, index, shouldLoad, progressRef }: Omit<SceneAssetProps, 'kind'>) {
+function PlaceholderAsset({ scene, shouldLoad, progressRef }: Omit<SceneAssetProps, 'kind' | 'index'>) {
   const local = useRef<HTMLDivElement | null>(null);
   const ref = progressRef ?? local;
   useEffect(() => {

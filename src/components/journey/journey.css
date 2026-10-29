@@ -157,3 +157,44 @@
   .block { max-width: 100%; }
   .scene-asset__visual { display: none; }
 }
+
+/* --- Panorama (cena 6): interface legível dentro da identidade --- */
+.block[data-kind='panorama'], .block[data-kind='cases'] { max-width: 100%; }
+.panorama { display: grid; gap: var(--space-6); }
+.panorama__kicker { margin: 0; opacity: .8; }
+.panorama__grid { display: grid; gap: var(--space-5); grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+.panorama__card {
+  background: var(--color-surface-editorial); color: var(--selva-ink);
+  border-radius: var(--radius-l); padding: var(--card-pad-s);
+  display: grid; gap: var(--space-4); align-content: start;
+  border: var(--border) solid transparent;
+}
+.panorama__card[data-primary='true'] { border-color: var(--color-accent); }
+.panorama__dim { margin: 0; opacity: .7; }
+.panorama__status { font-size: clamp(22px, 2.2vw, 32px); margin: 0; }
+.panorama__card[data-status='atencao'] .panorama__status { color: var(--selva-red); }
+.panorama__card[data-status='oportunidade'] .panorama__status { color: var(--selva-orange-deep); }
+.panorama__card[data-status='bem-avaliada'] .panorama__status { color: var(--selva-navy); }
+.panorama__card[data-status='sem-dados'] .panorama__status { color: var(--selva-ink-a35); }
+.panorama__text { margin: 0; font-size: var(--text-body-s); }
+.panorama__disclaimer { margin: 0; font-size: var(--text-body-xs); max-width: var(--measure); opacity: .8; }
+
+/* --- Cases (cena 7) --- */
+.cases-strip { display: grid; gap: var(--space-5); }
+.cases-strip__kicker, .cases-strip__note { margin: 0; opacity: .8; }
+.cases-strip__list { display: flex; gap: var(--grid-gap); overflow-x: auto; padding-bottom: var(--space-3); scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+.cases-strip__list > li { flex: none; scroll-snap-align: start; }
+.cases-strip__link { text-decoration: none; display: block; }
+.cases-strip__link:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); border-radius: var(--radius-m); }
+
+.case-card { width: var(--card-w); display: grid; gap: var(--space-3); color: inherit; }
+.case-card__media { position: relative; aspect-ratio: var(--card-aspect); border-radius: var(--radius-m); overflow: hidden; background: var(--case-bg); }
+.case-card__name { font-size: clamp(16px, 1.4vw, 22px); margin: 0; }
+.case-card__kind { margin: 0; opacity: .7; }
+.cases-strip__link:hover .case-card__media { outline: var(--border) solid var(--case-bg); outline-offset: 2px; }
+
+/* Blocos altos (panorama, cases): esconde o rótulo do asset para não sobrepor texto */
+.scene:has(.block[data-kind='panorama'][data-state='active']) .scene-asset__label,
+.scene:has(.block[data-kind='panorama'][data-state='active']) .scene-asset__visual,
+.scene:has(.block[data-kind='cases'][data-state='active']) .scene-asset__label,
+.scene:has(.block[data-kind='cases'][data-state='active']) .scene-asset__visual { opacity: 0; }

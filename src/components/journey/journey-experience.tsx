@@ -37,12 +37,13 @@ function applyProgress(section: HTMLElement, progress: number) {
   });
 }
 
+/** Slots como elementos (não funções): atravessam a fronteira server → client. */
 export type JourneyExperienceProps = {
-  renderPanorama?: () => React.ReactNode;
-  renderCases?: () => React.ReactNode;
+  panoramaSlot?: React.ReactNode;
+  casesSlot?: React.ReactNode;
 };
 
-export function JourneyExperience({ renderPanorama, renderCases }: JourneyExperienceProps) {
+export function JourneyExperience({ panoramaSlot, casesSlot }: JourneyExperienceProps) {
   const reduced = useReducedMotion();
   const sections = useRef<(HTMLElement | null)[]>([]);
   const lenisRef = useRef<Lenis | null>(null);
@@ -154,8 +155,8 @@ export function JourneyExperience({ renderPanorama, renderCases }: JourneyExperi
             shouldLoad={i <= currentIndex + 1}
             reduced={reduced}
             onGoToScene={(id) => scrollToScene(id)}
-            renderPanorama={renderPanorama}
-            renderCases={renderCases}
+            panoramaSlot={panoramaSlot}
+            casesSlot={casesSlot}
           />
         ))}
       </main>

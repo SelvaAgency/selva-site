@@ -18,9 +18,9 @@ export type SceneSectionProps = {
   shouldLoad: boolean;
   reduced: boolean;
   onGoToScene: (id: string) => void;
-  /** slots para blocos que chegam em outra branch (panorama, cases) */
-  renderPanorama?: () => React.ReactNode;
-  renderCases?: () => React.ReactNode;
+  /** slots (elementos) para panorama e cases, montados pela página */
+  panoramaSlot?: React.ReactNode;
+  casesSlot?: React.ReactNode;
 };
 
 /** Lista de "unidades de scroll" de uma cena: cada bloco de texto, cada pergunta e as escolhas. */
@@ -32,7 +32,7 @@ export function sceneUnits(scene: Scene): number {
 }
 
 export const SceneSection = forwardRef<HTMLElement, SceneSectionProps>(function SceneSection(
-  { scene, index, shouldLoad, reduced, onGoToScene, renderPanorama, renderCases },
+  { scene, index, shouldLoad, reduced, onGoToScene, panoramaSlot, casesSlot },
   ref,
 ) {
   const assetRef = useRef<HTMLDivElement | null>(null);
@@ -63,9 +63,9 @@ export const SceneSection = forwardRef<HTMLElement, SceneSectionProps>(function 
         push(<QuestionBlock id={id} n={qn} total={totalQ} />, `q${id}`, 'question');
       }
     } else if (isPanoramaBlock(b)) {
-      push(renderPanorama?.() ?? <p className="t-label">[PLACEHOLDER — panorama]</p>, `p${i}`, 'panorama');
+      push(panoramaSlot ?? <p className="t-label">[PLACEHOLDER — panorama]</p>, `p${i}`, 'panorama');
     } else if (isCasesBlock(b)) {
-      push(renderCases?.() ?? <p className="t-label">[PLACEHOLDER — cases]</p>, `c${i}`, 'cases');
+      push(casesSlot ?? <p className="t-label">[PLACEHOLDER — cases]</p>, `c${i}`, 'cases');
     }
   });
   if (scene.choices) {
@@ -84,7 +84,7 @@ export const SceneSection = forwardRef<HTMLElement, SceneSectionProps>(function 
       style={{ ['--n' as string]: n }}
     >
       <div className="scene__pin">
-        <SceneAsset scene={scene} index={index} shouldLoad={shouldLoad} progressRef={assetRef} />
+        <SceneAsset scene={scene} shouldLoad={shouldLoad} progressRef={assetRef} />
         <div className="scene__content">{items}</div>
       </div>
     </section>
