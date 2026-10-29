@@ -18,9 +18,13 @@ A luz não é fixa por cena: muda com a posição do scroll, quando a câmera at
 - `switchAt` é provisório: será calibrado pelo quadro real em que a câmera atravessa o dossel no trecho T1.
 - Demais cenas: escuras até nova orientação.
 
+## Convenção de nomes dos brutos
+`assets-src/cena<N>-T<n>.mp4` (cena + trecho), por exemplo `cena0-T1.mp4`, `cena0-T2.mp4`.
+
 ## Clipes de teste (Fase 3)
 - `assets-src/` guarda os brutos entregues pelo Gui e **não entra no git**.
-- T1: trecho real da cena 0, 720p, 30 fps, 10 s. A cena 0 completa tem dois trechos (20 s).
+- T1 e T2: trechos reais da cena 0, originais do Magnific (T1 em 720p, T2 em 1080p, ambos 30 fps, 10 s). A emenda entre eles ainda não é a final: servem para medir o desempenho do scroll. Chegaram como `t1.mp4` e `t2.mp4`; daqui em diante os arquivos seguem a convenção abaixo.
+- Trechos de tamanhos diferentes são concatenados no maior quadro 16:9 (até 1920×1080); o menor é ampliado e o `manifest.json` registra o tamanho nativo de cada um.
 - Os scripts em `scripts/` geram as versões otimizadas em `public/` a partir de `assets-src/`.
 
 ## Contrato técnico (Fase 3 define a técnica)

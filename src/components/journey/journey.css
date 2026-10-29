@@ -234,3 +234,7 @@
 .journey .hud--top { transition: color var(--dur-slow) var(--ease-out); }
 .journey[data-light='clara'] .hud--top { color: var(--selva-ink); }
 .journey[data-light='clara'] .hud--top .btn:hover { background: var(--selva-ink); color: var(--selva-paper); }
+
+/* --- Assets reais (vídeo ou frames): preenchem o pin, recorte central --- */
+.scene-asset--video, .scene-asset--frames { background: #1a1b1d center / cover no-repeat; }
+.scene-asset__media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; display: block; }

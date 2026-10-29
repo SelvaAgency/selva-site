@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { sceneIndex, sceneList } from '@/content';
 import { activeUnit, lightAt } from '@/lib/scene-light';
+import { emitSceneProgress } from './assets/use-scene-progress';
 import { track } from '@/lib/events';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useJourney } from '@/state/journey';
@@ -26,7 +27,7 @@ function setLight(section: HTMLElement, light: string, isCurrent: boolean) {
 function applyProgress(section: HTMLElement, progress: number, index: number, isCurrent: boolean) {
   setLight(section, lightAt(sceneList[index], progress), isCurrent);
   const asset = section.querySelector<HTMLElement>('.scene-asset');
-  if (asset) asset.style.setProperty('--p', progress.toFixed(4));
+  if (asset) emitSceneProgress(asset, progress);
   const blocks = section.querySelectorAll<HTMLElement>('.block');
   const n = blocks.length;
   const active = activeUnit(progress, n);

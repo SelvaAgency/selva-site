@@ -1,7 +1,12 @@
 {
   "_nota": "Rótulos de interface (botões, navegação, mensagens de sistema). Nenhum texto de cena aqui. status: proposta — ajustes só com o Gui.",
   "status": "proposta",
-  "brand": { "name": "Selva", "legalName": "Selva Agency", "city": "São Paulo", "since": "2014" },
+  "brand": {
+    "name": "Selva",
+    "legalName": "Selva Agency",
+    "city": "São Paulo",
+    "since": "2014"
+  },
   "meta": {
     "title": "Selva — Oportunidades para o seu negócio no digital",
     "description": "Uma jornada consultiva para identificar oportunidades na presença digital da sua empresa. Selva Agency, São Paulo."
@@ -64,5 +69,39 @@
   "dev": {
     "prototypeBadge": "Protótipo cinza — Fase 2",
     "placeholderPage": "Página em construção."
+  },
+  "lab": {
+    "title": "Laboratório — cena 0",
+    "subtitle": "Fase 3: vídeo com scrub vs sequência de frames. Página de teste, não indexada.",
+    "missing": "[PLACEHOLDER — assets da cena 0 não gerados. Coloque o trecho real em assets-src/ e rode: npm run prepare:scene -- --scene cena0 --in assets-src/cena0-T1.mp4]",
+    "technique": "Técnica",
+    "video": "Vídeo (scrub)",
+    "frames": "Frames (canvas)",
+    "variant": "Variante",
+    "device": "Dispositivo",
+    "metrics": {
+      "fps": "fps no scroll",
+      "lag": "atraso máx. (quadros)",
+      "target": "quadro pedido",
+      "shown": "quadro exibido",
+      "presented": "quadros apresentados",
+      "dropped": "descartados",
+      "firstFrame": "1º quadro (ms)",
+      "bytes": "baixado / total",
+      "decode": "decode/seek médio (ms)",
+      "resident": "bitmaps em memória",
+      "loaded": "quadros baixados",
+      "memory": "heap JS (MB)",
+      "dpr": "DPR",
+      "viewport": "viewport",
+      "ua": "navegador",
+      "lowPower": "economia de energia"
+    },
+    "copy": "Copiar relatório",
+    "copied": "Relatório copiado. Cole na conversa.",
+    "reset": "Zerar medições",
+    "scrollHint": "Role até o fim da cena e volte, 3 vezes, no ritmo normal.",
+    "reducedNotice": "Movimento reduzido ativo: a cena mostra só o pôster.",
+    "unknown": "n/d"
   }
 }

@@ -12,7 +12,7 @@
 - Luz varia por posição de scroll, não por cena: na cena 0 o texto fica na névoa clara e as escolhas no solo escuro; troca no meio da descida.
 - Preview por branch na Vercel (passo a passo em `docs/deploy.md`).
 - Peso por cena no mobile: meta de 8 MB, mas o limite só será fixado depois de medir a cena 0 real (dois trechos, 20 s) nas duas técnicas.
-- Fase 3 sem clipe sintético: usar o trecho real T1 (720p, 30 fps, 10 s) em `assets-src/`.
+- Fase 3 sem clipe sintético: T1 (720p) e T2 (1080p), originais do Magnific a 30 fps, em `assets-src/`. A emenda não é final; servem para medir o scroll.
 - Tokens visuais extraídos do site atual aprovados como estão (`docs/tokens.md`), incluindo aliases semânticos e a camada de overlay escuro sobre as cenas.
 - Pular perguntas: botão explícito "Pular" em cada pergunta, além de poder simplesmente rolar adiante. Pergunta pulada = `optionId: null`.
 - Ordem das branches da Fase 2: setup → conteúdo → estado → cenas → panorama → rotas duras.
